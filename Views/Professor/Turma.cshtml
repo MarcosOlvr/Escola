@@ -1,0 +1,17 @@
+﻿@model List<ApplicationUser>
+
+@{
+    ViewData["Title"] = "Turma";
+}
+
+<div class="container p-3">
+    <h2 class="text-center">Turma</h2>
+    <h1>VAI CARALHO</h1>
+    @foreach (var obj in Model)
+    {
+        <div>
+            <p>@obj.NomeCompleto</p>
+        </div>
+    }
+    <div class="pb-3"></div>
+</div>

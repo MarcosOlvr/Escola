@@ -1,5 +1,7 @@
 using Escola.Data;
 using Escola.Models;
+using Escola.Repositories;
+using Escola.Repositories.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +16,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddScoped<IProfessorRepository, ProfessorRepository>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
