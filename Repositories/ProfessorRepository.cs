@@ -1,5 +1,6 @@
 ﻿using Escola.Data;
 using Escola.Models;
+using Escola.Models.ViewModels;
 using Escola.Repositories.Contracts;
 using System;
 
@@ -12,6 +13,35 @@ namespace Escola.Repositories
         public ProfessorRepository(ApplicationDbContext db)
         {
             _db = db;
+        }
+
+        public ApplicationUser GetAluno(string alunoId)
+        {
+            var aluno = _db.Users.Find(alunoId);
+
+            return aluno;
+        }
+
+        public NotasDoAlunoVM GetAlunoNota(string alunoId)
+        {
+            var aluno = _db.Users.Find(alunoId);
+
+            var portugues = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 2).ToList();
+            var matematica = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 1).ToList();
+            var historia = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 3).ToList();
+            var geografia = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 4).ToList();
+            var ciencias = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 5).ToList();
+
+            var notasDoAluno = new NotasDoAlunoVM();
+
+            notasDoAluno.Aluno = aluno;
+            notasDoAluno.Portugues = portugues;
+            notasDoAluno.Matematica = matematica;
+            notasDoAluno.Historia = historia;
+            notasDoAluno.Geografia = geografia;
+            notasDoAluno.Ciencias = ciencias;
+
+            return notasDoAluno;
         }
 
         public List<ApplicationUser> GetAlunosNaTurma(int turmaId)

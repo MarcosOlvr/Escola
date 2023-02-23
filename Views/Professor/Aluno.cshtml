@@ -1,0 +1,222 @@
+﻿@model NotasDoAlunoVM
+
+@{
+    ViewData["Title"] = $"Aluno - {@Model.Aluno.NomeCompleto}";
+}
+
+<h1>Notas do Aluno @Model.Aluno.NomeCompleto</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr class="text-center">
+            <th scope="col" rowspan="2">Materias</th>
+            <th scope="col" colspan="4">Notas</th>
+            <th scope="col" colspan="4">Faltas</th>
+            <th scope="col" rowspan="2">Resultado global</th>
+            <th scope="col" rowspan="2">Total de faltas</th>
+            <th scope="col" rowspan="2">Resultado final</th>
+        </tr>
+        <tr>
+            <th scope="col">1º Bim</th>
+            <th scope="col">2º Bim</th>
+            <th scope="col">3º Bim</th>
+            <th scope="col">4º Bim</th>
+            <th scope="col">1º Bim</th>
+            <th scope="col">2º Bim</th>
+            <th scope="col">3º Bim</th>
+            <th scope="col">4º Bim</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center">
+            <th scope="row">Português</th>
+            @foreach (var port in Model.Portugues)
+            {
+                @if (port.BimestreFK == 1)
+                {
+                    <td>@port.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (port.BimestreFK == 2)
+                {
+                    <td>@port.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (port.BimestreFK == 3)
+                {
+                    <td>@port.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (port.BimestreFK == 4)
+                {
+                    <td>@port.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+        </tr>
+        <tr class="text-center">
+            <th scope="row">Matemática</th>
+            @foreach (var mat in Model.Matematica)
+            {
+                @if (mat.BimestreFK == 1)
+                {
+                    <td>@mat.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (mat.BimestreFK == 2)
+                {
+                    <td>@mat.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (mat.BimestreFK == 3)
+                {
+                    <td>@mat.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (mat.BimestreFK == 4)
+                {
+                    <td>@mat.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+        </tr>
+        <tr class="text-center">
+            <th scope="row">História</th>
+            @foreach (var hist in Model.Historia)
+            {
+                @if (hist.BimestreFK == 1)
+                {
+                    <td>@hist.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (hist.BimestreFK == 2)
+                {
+                    <td>@hist.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (hist.BimestreFK == 3)
+                {
+                    <td>@hist.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (hist.BimestreFK == 4)
+                {
+                    <td>@hist.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+        </tr>
+        <tr class="text-center">
+            <th scope="row">Geografia</th>
+            @foreach (var geo in Model.Geografia)
+            {
+                @if (geo.BimestreFK == 1)
+                {
+                    <td>@geo.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (geo.BimestreFK == 2)
+                {
+                    <td>@geo.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (geo.BimestreFK == 3)
+                {
+                    <td>@geo.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (geo.BimestreFK == 4)
+                {
+                    <td>@geo.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+        </tr>
+        <tr class="text-center">
+            <th scope="row">Ciências</th>
+            @foreach (var cien in Model.Ciencias)
+            {
+                @if (cien.BimestreFK == 1)
+                {
+                    <td>@cien.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (cien.BimestreFK == 2)
+                {
+                    <td>@cien.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (cien.BimestreFK == 3)
+                {
+                    <td>@cien.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (cien.BimestreFK == 4)
+                {
+                    <td>@cien.Valor</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+        </tr>
+    </tbody>
+</table>

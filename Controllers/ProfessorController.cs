@@ -1,4 +1,5 @@
-﻿using Escola.Repositories.Contracts;
+﻿using Escola.Models.ViewModels;
+using Escola.Repositories.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,22 @@ namespace Escola.Controllers
             var alunosNaTurma = _professorRepository.GetAlunosNaTurma(turmaId);
 
             return View(alunosNaTurma);
+        }
+
+        [Route("Professor/Aluno/{alunoId}")]
+        public IActionResult Aluno(string alunoId)
+        {
+            if (alunoId == null)
+                return NotFound();
+
+            var aluno = _professorRepository.GetAluno(alunoId);
+
+            if (aluno == null)
+                return NotFound();
+
+            var alunoNotas = _professorRepository.GetAlunoNota(alunoId);
+
+            return View(alunoNotas);
         }
     }
 }
