@@ -44,11 +44,14 @@ namespace Escola.Repositories
             return notasDoAluno;
         }
 
-        public List<ApplicationUser> GetAlunosNaTurma(int turmaId)
+        public TurmaEAlunos GetUsuariosNaTurma(int turmaId)
         {
+            var turma = _db.Turmas.Find(turmaId);
+
             var turmaListadaComAlunos = _db.TurmaUser.Where(x => x.TurmaFK == turmaId).ToList();
 
             List<ApplicationUser> alunosNaTurma = new List<ApplicationUser>();
+            List<ApplicationUser> professoresNaTurma = new List<ApplicationUser>();
 
             foreach (var obj in turmaListadaComAlunos)
             {
@@ -56,13 +59,30 @@ namespace Escola.Repositories
 
                 var isInRole = _db.UserRoles.FirstOrDefault(x => x.UserId == aluno.Id);
 
-                if (isInRole.UserId == aluno.Id && isInRole.RoleId == "3")
+                if (isInRole.UserId == aluno.Id && isInRole.RoleId == "3") // Role 3 é a role de alunos
                 {
                     alunosNaTurma.Add(aluno);
                 }
             }
 
-            return alunosNaTurma;
+            foreach (var obj in turmaListadaComAlunos)
+            {
+                var professor = _db.Users.Find(obj.UserFK);
+                var isInRole = _db.UserRoles.FirstOrDefault(x => x.UserId == professor.Id);
+
+                if (isInRole.UserId == professor.Id && isInRole.RoleId == "2")
+                {
+                    professoresNaTurma.Add(professor);
+                }
+            }
+
+            var turmaEAlunos = new TurmaEAlunos();
+
+            turmaEAlunos.Turma = turma;
+            turmaEAlunos.Alunos = alunosNaTurma;
+            turmaEAlunos.Professores = professoresNaTurma;
+
+            return turmaEAlunos;
         }
 
         public List<Turma> GetTurmas(string userName)

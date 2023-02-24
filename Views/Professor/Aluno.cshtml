@@ -4,16 +4,24 @@
     ViewData["Title"] = $"Aluno - {@Model.Aluno.NomeCompleto}";
 }
 
-<h1>Notas do Aluno @Model.Aluno.NomeCompleto</h1>
+<div class="row pt-4">
+    <div class="col-6">
+        <h2>Aluno(a): @Model.Aluno.NomeCompleto</h2>
+    </div>
+    <div class="col-6 text-end">
+        <a asp-controller="" asp-action="" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> &nbsp; Adicionar nota
+        </a>
+    </div>
+</div>
+<br />
 
-<table class="table table-bordered">
+<table class="table table-bordered border-dark text-center">
     <thead>
-        <tr class="text-center">
+        <tr>
             <th scope="col" rowspan="2">Materias</th>
             <th scope="col" colspan="4">Notas</th>
             <th scope="col" colspan="4">Faltas</th>
-            <th scope="col" rowspan="2">Resultado global</th>
-            <th scope="col" rowspan="2">Total de faltas</th>
             <th scope="col" rowspan="2">Resultado final</th>
         </tr>
         <tr>
@@ -28,7 +36,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="text-center">
+        <tr>
             <th scope="row">Português</th>
             @foreach (var port in Model.Portugues)
             {
@@ -66,7 +74,7 @@
                 }
             }
         </tr>
-        <tr class="text-center">
+        <tr>
             <th scope="row">Matemática</th>
             @foreach (var mat in Model.Matematica)
             {
@@ -104,7 +112,7 @@
                 }
             }
         </tr>
-        <tr class="text-center">
+        <tr>
             <th scope="row">História</th>
             @foreach (var hist in Model.Historia)
             {
@@ -142,7 +150,7 @@
                 }
             }
         </tr>
-        <tr class="text-center">
+        <tr>
             <th scope="row">Geografia</th>
             @foreach (var geo in Model.Geografia)
             {
@@ -180,7 +188,7 @@
                 }
             }
         </tr>
-        <tr class="text-center">
+        <tr>
             <th scope="row">Ciências</th>
             @foreach (var cien in Model.Ciencias)
             {

@@ -27,9 +27,12 @@ namespace Escola.Controllers
             if (turmaId == 0)
                 return NotFound();
 
-            var alunosNaTurma = _professorRepository.GetAlunosNaTurma(turmaId);
+            var usuariosNaTurma = _professorRepository.GetUsuariosNaTurma(turmaId);
 
-            return View(alunosNaTurma);
+            if (usuariosNaTurma == null)
+                return NotFound();
+
+            return View(usuariosNaTurma);
         }
 
         [Route("Professor/Aluno/{alunoId}")]

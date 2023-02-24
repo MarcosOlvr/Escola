@@ -1,18 +1,45 @@
-﻿@model List<ApplicationUser>
+﻿@model TurmaEAlunos
 
 @{
-    ViewData["Title"] = "Turma";
+    ViewData["Title"] = $"{Model.Turma.Nome}";
 }
 
 <div class="container p-3">
-    <h2 class="text-center">Turma</h2>
-    <h1>VAI CARALHO</h1>
-    @foreach (var obj in Model)
-    {
-        <div>
-            <p>@obj.NomeCompleto</p>
-            <a asp-action="Aluno" asp-controller="Professor" asp-route-id="@obj.Id">Mais informações</a>
-        </div>
-    }
-    <div class="pb-3"></div>
+<h2 class="text-center">Turma do @Model.Turma.Nome</h2>
+<h3 class="mt-5">Alunos</h3>
+<table class="table text-center">
+    <thead class="text-light bg-primary">
+        <tr>
+            <th scope="col">Nome completo</th>
+            <th scope="col">Data de nascimento</th>
+            <th scope="col"></th>
+        </tr>
+     </thead>
+    <tbody>
+        @foreach (var obj in Model.Alunos)
+        {
+            <tr>
+                <td>@obj.NomeCompleto</td>
+                <td>@obj.DataNascimento.Day / @obj.DataNascimento.Month / @obj.DataNascimento.Year</td>
+                <td><a asp-controller="Professor" asp-action="Aluno" asp-route-id="@obj.Id" class="btn btn-primary">Mais informações</a></td>
+            </tr>     
+        }
+    </tbody>
+</table>
+<h3 class="mt-5">Professores</h3>
+<table class="table text-center">
+    <thead class="text-light bg-danger">
+        <tr>
+            <th scope="col">Nome completo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model.Professores)
+        {
+            <tr>
+                <td>@obj.NomeCompleto</td>
+            </tr>
+        }
+    </tbody>
+</table>
 </div>

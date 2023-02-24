@@ -5,13 +5,17 @@
 }
 
 <div class="container p-3">
-    <h2 class="text-center">Turmas</h2>
-    @foreach (var obj in Model)
-    {
-        <div>
-            <p>@obj.Nome</p>
-            <a asp-controller="Professor" asp-action="Turma" asp-route-id="@obj.Id">Mais informações</a>
-        </div>
-    }
+    <h2 class="text-center">Minhas turmas</h2>
+    <div class="card-group p-2">
+        @foreach (var obj in Model)
+        {
+            <div class="card text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@obj.Nome</h5>
+                    <a asp-controller="Professor" asp-action="Turma" asp-route-id="@obj.Id" class="btn btn-primary">Mais informações</a>
+                </div>
+            </div>
+        }
+    </div>
     <div class="pb-3"></div>
 </div>
