@@ -59,6 +59,12 @@ namespace Escola.Data
                 .WithMany()
                 .HasForeignKey(t => t.ProfessorFK)
                 .OnDelete(DeleteBehavior.NoAction);
+            
+            builder.Entity<Nota>()
+                .HasOne<Turma>()
+                .WithMany()
+                .HasForeignKey(t => t.TurmaFK)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
