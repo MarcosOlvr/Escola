@@ -50,5 +50,16 @@ namespace Escola.Controllers
 
             return View(alunoNotas);
         }
+
+        [HttpGet]
+        [Route("Professor/AddNota/{id}")]
+        public IActionResult AddNota(string alunoId)
+        {
+            var vm = new AddNotaVM();
+
+            vm.Aluno = _professorRepository.GetAluno(alunoId);
+
+            return View();
+        }
     }
 }
