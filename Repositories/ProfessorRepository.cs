@@ -101,5 +101,22 @@ namespace Escola.Repositories
 
             return turmas;
         }
+
+        public List<int> GetMateriasProfessor(string userName, int turmaId)
+        {
+            var prof = _db.Users.FirstOrDefault(x => x.UserName == userName);
+
+            List<int> MateriasId = new List<int>();
+
+            foreach (var obj in _db.MateriaTurmaProfessores)
+            {
+                if (obj.TurmaFK == turmaId && obj.Professor == prof.Id)
+                {
+                    MateriasId.Add(obj.MateriaFK);
+                }
+            }
+
+            return MateriasId;
+        }
     }
 }

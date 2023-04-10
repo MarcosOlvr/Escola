@@ -36,6 +36,14 @@ namespace Escola.Repositories
             return notasDoAluno;
         }
 
+        public Turma GetTurmaById(string alunoId)
+        {
+            var turmaDoAluno = _db.TurmaUser.FirstOrDefault(x => x.UserFK ==  alunoId);
+            var turma = _db.Turmas.FirstOrDefault(x => x.Id == turmaDoAluno.TurmaFK);
+
+            return turma;
+        }
+
         public Turma GetTurmaByUsername(string userName)
         {
             var aluno = _db.Users.FirstOrDefault(u => u.UserName == userName);

@@ -6,6 +6,7 @@ namespace Escola.Repositories.Contracts
     public interface IAlunoRepository
     {
         Turma GetTurmaByUsername(string userName);
+        Turma GetTurmaById(string alunoId);
         NotasDoAlunoVM GetNotasDoAluno(string userName, int turmaId);
     }
 }

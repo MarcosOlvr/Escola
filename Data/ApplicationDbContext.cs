@@ -18,6 +18,7 @@ namespace Escola.Data
         public DbSet<Nota> Notas { get; set; }
         public DbSet<Materia> Materias { get; set; }
         public DbSet<TurmaUser> TurmaUser { get; set; }
+        public DbSet<MateriaTurmaProfessor> MateriaTurmaProfessores { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -64,6 +65,24 @@ namespace Escola.Data
                 .HasOne<Turma>()
                 .WithMany()
                 .HasForeignKey(t => t.TurmaFK)
+                .OnDelete(DeleteBehavior.NoAction);
+            
+            builder.Entity<MateriaTurmaProfessor>()
+                .HasOne<Turma>()
+                .WithMany()
+                .HasForeignKey(t => t.TurmaFK)
+                .OnDelete(DeleteBehavior.NoAction);
+            
+            builder.Entity<MateriaTurmaProfessor>()
+                .HasOne<Materia>()
+                .WithMany()
+                .HasForeignKey(t => t.MateriaFK)
+                .OnDelete(DeleteBehavior.NoAction);
+            
+            builder.Entity<MateriaTurmaProfessor>()
+                .HasOne<ApplicationUser>()
+                .WithMany()
+                .HasForeignKey(t => t.Professor)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }
