@@ -102,21 +102,26 @@ namespace Escola.Repositories
             return turmas;
         }
 
-        public List<int> GetMateriasProfessor(string userName, int turmaId)
+        public List<Materia> GetMateriasProfessor(string userName, int turmaId)
         {
             var prof = _db.Users.FirstOrDefault(x => x.UserName == userName);
 
-            List<int> MateriasId = new List<int>();
+            List<Materia> Materias = new List<Materia>();
 
             foreach (var obj in _db.MateriaTurmaProfessores)
             {
                 if (obj.TurmaFK == turmaId && obj.Professor == prof.Id)
                 {
-                    MateriasId.Add(obj.MateriaFK);
+                    Materias.Add(_db.Materias.Find(obj.MateriaFK));
                 }
             }
 
-            return MateriasId;
+            return Materias;
+        }
+
+        public ApplicationUser GetProfessor(string userName)
+        {
+            return _db.Users.FirstOrDefault(x => x.UserName == userName);
         }
     }
 }

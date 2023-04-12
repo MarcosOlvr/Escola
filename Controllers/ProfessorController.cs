@@ -10,11 +10,15 @@ namespace Escola.Controllers
     {
         private readonly IProfessorRepository _professorRepository;
         private readonly IAlunoRepository _alunoRepo;
+        private readonly INotaRepository _notaRepo;
 
-        public ProfessorController(IProfessorRepository professorRepository, IAlunoRepository alunoRepo)
+        public ProfessorController(IProfessorRepository professorRepository, 
+            IAlunoRepository alunoRepo,
+            INotaRepository notaRepo)
         {
             _professorRepository = professorRepository;
             _alunoRepo = alunoRepo;
+            _notaRepo = notaRepo;
         }
 
         public IActionResult TurmasGeral()
@@ -54,14 +58,28 @@ namespace Escola.Controllers
         }
 
         [HttpGet]
-        [Route("Professor/AddNota/{id}")]
+        [Route("Professor/AddNota/{alunoId}")]
         public IActionResult AddNota(string alunoId)
         {
             var vm = new AddNotaVM();
-            var turma = _alunoRepo.GetTurmaByUsername(alunoId);
-
-            vm.Aluno = _professorRepository.GetAluno(alunoId);
+            var turma = _alunoRepo.GetTurmaById(alunoId);
+            vm.AlunoFK = alunoId;
+            vm.ProfessorFK = _professorRepository.GetProfessor(User.Identity.Name).Id;
+            vm.TurmaFK = turma.Id;
             vm.MateriasProfessor = _professorRepository.GetMateriasProfessor(User.Identity.Name, turma.Id);
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        [Route("Professor/AddNota/{alunoId}")]
+        public IActionResult AddNota(AddNotaVM vm) 
+        {
+            if (ModelState.IsValid)
+            {
+                _notaRepo.AddNota(vm);
+                return RedirectToAction("Aluno", new { alunoId = vm.AlunoFK });
+            }
 
             return View(vm);
         }

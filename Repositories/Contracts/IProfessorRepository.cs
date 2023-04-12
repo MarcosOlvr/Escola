@@ -5,10 +5,11 @@ namespace Escola.Repositories.Contracts
 {
     public interface IProfessorRepository
     {
+        ApplicationUser GetProfessor(string userName);
         List<Turma> GetTurmas(string userName);
         TurmaEAlunos GetUsuariosNaTurma(int turmaId);
         ApplicationUser GetAluno(string alunoId);
         NotasDoAlunoVM GetAlunoNota(string alunoId);
-        List<int> GetMateriasProfessor(string userName, int turmaId);
+        List<Materia> GetMateriasProfessor(string userName, int turmaId);
     }
 }

@@ -6,8 +6,44 @@
 
 <h2 class="h2 text-center">Adicionar nota ao aluno</h2>
 
-<form>
+<form asp-action="AddNota">
     <div>
+        <input hidden asp-for="AlunoFK" />
+        <input hidden asp-for="TurmaFK" />
+        <input hidden asp-for="ProfessorFK" />
+        <input hidden asp-for="MateriasProfessor" />
+        <div class="form-group p-2">
+            <label asp-for="Nota">Nota do aluno</label>
+            <input asp-for="Nota" min="0" max="10" class="form-control">
+        </div>
+        <div class="form-group p-2">
+            <label asp-for="Faltas">Total de faltas do aluno</label>
+            <input asp-for="Faltas" min="0" max="50" class="form-control">
+        </div>
+        <div class="form-group p-2">
+            <label for="exampleFormControlSelect1">Disciplina</label>
+            <select asp-for="MateriaFK" class="form-control">
+                <option value="0" disabled selected>Selecione uma matéria</option>
+                @foreach (var mat in Model.MateriasProfessor)
+                {
+                    <option value="@mat.Id">@mat.Nome</option>
+                }
+            </select>
+        </div>
+        <div class="form-group p-2">
+            <label for="exampleFormControlSelect1">Bimestre</label>
+            <select asp-for="BimestreFK" class="form-control">
+                <option value="0" disabled selected>Selecione um bimestre</option>
+                <option value="1">Primeiro</option>
+                <option value="2">Segundo</option>
+                <option value="3">Terceiro</option>
+                <option value="4">Quarto</option>
+            </select>
+        </div>
 
+        <div class="form-group p-2">
+            <input type="submit" value="Adicionar nota" class="btn btn-primary" />
+            <a asp-action="Aluno" asp-route-id="@Model.AlunoFK" class="btn btn-secondary">Voltar</a>
+        </div>
     </div>
 </form>

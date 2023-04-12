@@ -18,8 +18,8 @@ namespace Escola.Repositories
         {
             var aluno = _db.Users.FirstOrDefault(u => u.UserName == userName);
 
-            var portugues = _db.Notas.Where(x => x.AlunoFK == aluno.Id && x.MateriaFK == 1 && x.TurmaFK == turmaId).ToList();
-            var matematica = _db.Notas.Where(x => x.AlunoFK == aluno.Id && x.MateriaFK == 2 && x.TurmaFK == turmaId).ToList();
+            var portugues = _db.Notas.Where(x => x.AlunoFK == aluno.Id && x.MateriaFK == 2 && x.TurmaFK == turmaId).ToList();
+            var matematica = _db.Notas.Where(x => x.AlunoFK == aluno.Id && x.MateriaFK == 1 && x.TurmaFK == turmaId).ToList();
             var historia = _db.Notas.Where(x => x.AlunoFK == aluno.Id && x.MateriaFK == 3 && x.TurmaFK == turmaId).ToList();
             var geografia = _db.Notas.Where(x => x.AlunoFK == aluno.Id && x.MateriaFK == 4 && x.TurmaFK == turmaId).ToList();
             var ciencias = _db.Notas.Where(x => x.AlunoFK == aluno.Id && x.MateriaFK == 5 && x.TurmaFK == turmaId).ToList();
