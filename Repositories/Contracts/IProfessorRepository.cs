@@ -9,7 +9,6 @@ namespace Escola.Repositories.Contracts
         List<Turma> GetTurmas(string userName);
         TurmaEAlunos GetUsuariosNaTurma(int turmaId);
         ApplicationUser GetAluno(string alunoId);
-        NotasDoAlunoVM GetAlunoNota(string alunoId);
         List<Materia> GetMateriasProfessor(string userName, int turmaId);
     }
 }

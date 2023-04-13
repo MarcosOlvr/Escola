@@ -2,7 +2,7 @@
 {
     public class AddNotaVM
     {
-        public int Nota { get; set; }
+        public float Nota { get; set; }
         public int Faltas { get; set; }
         public int MateriaFK { get; set; }
         public int TurmaFK { get; set; }

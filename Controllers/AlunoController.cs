@@ -22,9 +22,9 @@ namespace Escola.Controllers
             return View(turma);
         }
 
-        public IActionResult Boletim(int turmaId)
+        public IActionResult Boletim()
         {
-            var notas = _alunoRepository.GetNotasDoAluno(User.Identity.Name, turmaId);
+            var notas = _alunoRepository.GetNotasDoAluno(User.Identity.Name);
 
             if (notas == null)
                 return NotFound();

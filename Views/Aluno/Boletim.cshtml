@@ -15,275 +15,61 @@
     <thead>
         <tr>
             <th scope="col" rowspan="2">Materias</th>
-            <th scope="col" colspan="4">Notas</th>
-            <th scope="col" colspan="4">Faltas</th>
+            <th scope="col" colspan="2">1º Bim.</th>
+            <th scope="col" colspan="2">2º Bim.</th>
+            <th scope="col" colspan="2">3º Bim.</th>
+            <th scope="col" colspan="2">4º Bim.</th>
             <th scope="col" rowspan="2">Resultado final</th>
         </tr>
         <tr>
-            <th scope="col">1º Bim</th>
-            <th scope="col">2º Bim</th>
-            <th scope="col">3º Bim</th>
-            <th scope="col">4º Bim</th>
-            <th scope="col">1º Bim</th>
-            <th scope="col">2º Bim</th>
-            <th scope="col">3º Bim</th>
-            <th scope="col">4º Bim</th>
+            <th scope="col">Nota</th>
+            <th scope="col" class="text-danger">Faltas</th>
+            <th scope="col">Nota</th>
+            <th scope="col" class="text-danger">Faltas</th>
+            <th scope="col">Nota</th>
+            <th scope="col" class="text-danger">Faltas</th>
+            <th scope="col">Nota</th>
+            <th scope="col" class="text-danger">Faltas</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <th scope="row">Português</th>
-            @foreach (var port in Model.Portugues)
+            @foreach (var mat in Model.Materias)
             {
-                @if (port.BimestreFK == 1)
+                <th scope="row">@mat.Nome</th>
+
+                @foreach (var notas in Model.Notas)
                 {
-                    <td>@port.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (port.BimestreFK == 2)
-                {
-                    <td>@port.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (port.BimestreFK == 3)
-                {
-                    <td>@port.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (port.BimestreFK == 4)
-                {
-                    <td>@port.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (port.BimestreFK == 1)
-                {
-                    <td>@port.Faltas</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (port.BimestreFK == 2)
-                {
-                    <td>@port.Faltas</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (port.BimestreFK == 3)
-                {
-                    <td>@port.Faltas</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (port.BimestreFK == 4)
-                {
-                    <td>@port.Faltas</td>
-                }
-                else
-                {
-                    <td></td>
+                    @foreach (var obj in notas)
+                    {
+                        if (mat.Id == obj.MateriaFK)
+                        {
+                            switch (obj.BimestreFK)
+                            {
+                                case 1:
+                                    <td>@obj.Valor</td>
+                                    <td>@obj.Faltas</td>
+                                    break;
+
+                                case 2:
+                                    <td>@obj.Valor</td>
+                                    <td>@obj.Faltas</td>
+                                    break;
+
+                                case 3:
+                                    <td>@obj.Valor</td>
+                                    <td>@obj.Faltas</td>
+                                    break;
+
+                                case 4:
+                                    <td>@obj.Valor</td>
+                                    <td>@obj.Faltas</td>
+                                    break;
+                            }
+                        }
+                    }
                 }
             }
-        </tr>
-        <tr>
-            <th scope="row">Matemática</th>
-            @foreach (var mat in Model.Matematica)
-            {
-                @if (mat.BimestreFK == 1)
-                {
-                    <td>@mat.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (mat.BimestreFK == 2)
-                {
-                    <td>@mat.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (mat.BimestreFK == 3)
-                {
-                    <td>@mat.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (mat.BimestreFK == 4)
-                {
-                    <td>@mat.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (mat.BimestreFK == 1)
-                {
-                    <td>@mat.Faltas</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (mat.BimestreFK == 2)
-                {
-                    <td>@mat.Faltas</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (mat.BimestreFK == 3)
-                {
-                    <td>@mat.Faltas</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (mat.BimestreFK == 4)
-                {
-                    <td>@mat.Faltas</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-            }
-        </tr>
-        <tr>
-            <th scope="row">História</th>
-            @foreach (var hist in Model.Historia)
-            {
-                @if (hist.BimestreFK == 1)
-                {
-                    <td>@hist.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (hist.BimestreFK == 2)
-                {
-                    <td>@hist.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (hist.BimestreFK == 3)
-                {
-                    <td>@hist.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (hist.BimestreFK == 4)
-                {
-                    <td>@hist.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-            }
-        </tr>
-        <tr>
-            <th scope="row">Geografia</th>
-            @foreach (var geo in Model.Geografia)
-            {
-                @if (geo.BimestreFK == 1)
-                {
-                    <td>@geo.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (geo.BimestreFK == 2)
-                {
-                    <td>@geo.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (geo.BimestreFK == 3)
-                {
-                    <td>@geo.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (geo.BimestreFK == 4)
-                {
-                    <td>@geo.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-            }
-        </tr>
-        <tr>
-            <th scope="row">Ciências</th>
-            @foreach (var cien in Model.Ciencias)
-            {
-                @if (cien.BimestreFK == 1)
-                {
-                    <td>@cien.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (cien.BimestreFK == 2)
-                {
-                    <td>@cien.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (cien.BimestreFK == 3)
-                {
-                    <td>@cien.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (cien.BimestreFK == 4)
-                {
-                    <td>@cien.Valor</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-            }
-        </tr>
+      </tr>
     </tbody>
 </table>

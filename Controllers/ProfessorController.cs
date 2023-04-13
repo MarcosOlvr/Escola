@@ -52,9 +52,7 @@ namespace Escola.Controllers
             if (aluno == null)
                 return NotFound();
 
-            var alunoNotas = _professorRepository.GetAlunoNota(alunoId);
-
-            return View(alunoNotas);
+            return View();
         }
 
         [HttpGet]
