@@ -8,6 +8,15 @@
     <div class="col-6">
         <h2>Aluno(a): @Model.Aluno.NomeCompleto</h2>
     </div>
+
+    @if (User.IsInRole("Professor") || User.IsInRole("Admin"))
+    {
+        <div class="col-6 text-end">
+            <a asp-controller="Professor" asp-action="AddNota" asp-route-id="@Model.Aluno.Id" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Adicionar nota
+            </a>
+        </div>
+    }
 </div>
 <br />
 
@@ -33,9 +42,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            @foreach (var mat in Model.Materias)
-            {
+        @foreach (var mat in Model.Materias)
+         {
+            <tr>
                 <th scope="row">@mat.Nome</th>
 
                 @foreach (var notas in Model.Notas)
@@ -69,7 +78,16 @@
                         }
                     }
                 }
-            }
-      </tr>
+            </tr>
+        }
     </tbody>
 </table>
+
+@if (User.IsInRole("Aluno"))
+{
+    <a asp-controller="Aluno" asp-action="Index" class="btn btn-secondary">Voltar</a>
+}
+else
+{
+    <a asp-controller="Professor" asp-action="TurmasGeral" class="btn btn-secondary">Voltar</a>
+}

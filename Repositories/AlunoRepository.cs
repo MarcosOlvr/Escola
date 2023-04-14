@@ -14,15 +14,18 @@ namespace Escola.Repositories
             _db = db;
         }
 
-        public NotasDoAlunoVM GetNotasDoAluno(string userName)
+        public ApplicationUser GetAluno(string userName)
         {
-            var aluno = _db.Users.FirstOrDefault(u => u.UserName == userName);
+            return _db.Users.FirstOrDefault(u => u.UserName == userName);
+        }
 
-            var portugues = _db.Notas.Where(x => x.AlunoFK == aluno.Id && x.MateriaFK == 2).ToList();
-            var matematica = _db.Notas.Where(x => x.AlunoFK == aluno.Id && x.MateriaFK == 1).ToList();
-            var historia = _db.Notas.Where(x => x.AlunoFK == aluno.Id && x.MateriaFK == 3).ToList();
-            var geografia = _db.Notas.Where(x => x.AlunoFK == aluno.Id && x.MateriaFK == 4).ToList();
-            var ciencias = _db.Notas.Where(x => x.AlunoFK == aluno.Id && x.MateriaFK == 5).ToList();
+        public NotasDoAlunoVM GetNotasDoAluno(string alunoId)
+        {
+            var portugues = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 2).ToList();
+            var matematica = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 1).ToList();
+            var historia = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 3).ToList();
+            var geografia = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 4).ToList();
+            var ciencias = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 5).ToList();
 
             var notasDoAluno = new NotasDoAlunoVM();
             List<List<Nota>> todasNotas = new List<List<Nota>>();
@@ -33,7 +36,7 @@ namespace Escola.Repositories
             todasNotas.Add(ciencias);
 
 
-            notasDoAluno.Aluno = aluno;
+            notasDoAluno.Aluno = _db.Users.Find(alunoId);
             notasDoAluno.Materias = _db.Materias.ToList();
             notasDoAluno.Notas = todasNotas;
 

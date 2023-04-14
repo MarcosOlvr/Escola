@@ -1,4 +1,5 @@
-﻿using Escola.Repositories.Contracts;
+﻿using Escola.Models.ViewModels;
+using Escola.Repositories.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Escola.Controllers
@@ -15,16 +16,23 @@ namespace Escola.Controllers
         public IActionResult Index()
         {
             var turma = _alunoRepository.GetTurmaByUsername(User.Identity.Name);
+            var aluno = _alunoRepository.GetAluno(User.Identity.Name);
 
-            if (turma == null)
+            var vm = new AlunoVerTurmaVM();
+
+            if (turma == null || aluno == null)
                 return NotFound();
 
-            return View(turma);
+            vm.Turma = turma;
+            vm.Aluno = aluno;
+
+            return View(vm);
         }
 
-        public IActionResult Boletim()
+        [Route("Aluno/Boletim/{alunoId}")]
+        public IActionResult Boletim(string alunoId)
         {
-            var notas = _alunoRepository.GetNotasDoAluno(User.Identity.Name);
+            var notas = _alunoRepository.GetNotasDoAluno(alunoId);
 
             if (notas == null)
                 return NotFound();

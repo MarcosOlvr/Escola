@@ -41,20 +41,6 @@ namespace Escola.Controllers
             return View(usuariosNaTurma);
         }
 
-        [Route("Professor/Aluno/{alunoId}")]
-        public IActionResult Aluno(string alunoId)
-        {
-            if (alunoId == null)
-                return NotFound();
-
-            var aluno = _professorRepository.GetAluno(alunoId);
-
-            if (aluno == null)
-                return NotFound();
-
-            return View();
-        }
-
         [HttpGet]
         [Route("Professor/AddNota/{alunoId}")]
         public IActionResult AddNota(string alunoId)

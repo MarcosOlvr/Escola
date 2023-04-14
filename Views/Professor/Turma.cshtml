@@ -21,7 +21,7 @@
             <tr>
                 <td>@obj.NomeCompleto</td>
                 <td>@obj.DataNascimento.Day / @obj.DataNascimento.Month / @obj.DataNascimento.Year</td>
-                <td><a asp-controller="Professor" asp-action="Aluno" asp-route-id="@obj.Id" class="btn btn-primary">Mais informações</a></td>
+                <td><a asp-controller="Aluno" asp-action="Boletim" asp-route-id="@obj.Id" class="btn btn-primary">Mais informações</a></td>
             </tr>     
         }
     </tbody>
@@ -42,4 +42,5 @@
         }
     </tbody>
 </table>
+    <a asp-controller="Professor" asp-action="TurmasGeral" class="btn btn-secondary">Voltar</a>
 </div>
