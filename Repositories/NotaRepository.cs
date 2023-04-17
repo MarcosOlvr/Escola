@@ -40,5 +40,29 @@ namespace Escola.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public NotasDoAlunoVM GetNotasDoAluno(string alunoId)
+        {
+            var portugues = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 2).ToList();
+            var matematica = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 1).ToList();
+            var historia = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 3).ToList();
+            var geografia = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 4).ToList();
+            var ciencias = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 5).ToList();
+
+            var notasDoAluno = new NotasDoAlunoVM();
+            List<List<Nota>> todasNotas = new List<List<Nota>>();
+            todasNotas.Add(portugues);
+            todasNotas.Add(matematica);
+            todasNotas.Add(historia);
+            todasNotas.Add(geografia);
+            todasNotas.Add(ciencias);
+
+
+            notasDoAluno.Aluno = _db.Users.Find(alunoId);
+            notasDoAluno.Materias = _db.Materias.ToList();
+            notasDoAluno.Notas = todasNotas;
+
+            return notasDoAluno;
+        }
     }
 }

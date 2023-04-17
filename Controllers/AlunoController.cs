@@ -7,10 +7,12 @@ namespace Escola.Controllers
     public class AlunoController : Controller
     {
         private readonly IAlunoRepository _alunoRepository;
+        private readonly INotaRepository _notaRepo;
 
-        public AlunoController(IAlunoRepository alunoRepository)
+        public AlunoController(IAlunoRepository alunoRepository, INotaRepository notaRepo)
         {
             _alunoRepository = alunoRepository;
+            _notaRepo = notaRepo;
         }
 
         public IActionResult Index()
@@ -32,7 +34,7 @@ namespace Escola.Controllers
         [Route("Aluno/Boletim/{alunoId}")]
         public IActionResult Boletim(string alunoId)
         {
-            var notas = _alunoRepository.GetNotasDoAluno(alunoId);
+            var notas = _notaRepo.GetNotasDoAluno(alunoId);
 
             if (notas == null)
                 return NotFound();
