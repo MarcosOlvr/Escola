@@ -64,5 +64,28 @@ namespace Escola.Repositories
 
             return notasDoAluno;
         }
+
+        public NotasDoAlunoVM GetNotasAddByProf(string alunoId, string profUserName)
+        {
+            var prof = _db.Users.FirstOrDefault(x => x.UserName == profUserName);
+
+            List<List<Nota>> listaComNotas = new List<List<Nota>>();
+            listaComNotas.Add(_db.Notas.Where(x => x.AlunoFK == alunoId && x.ProfessorFK == prof.Id).ToList());
+
+            var matProf = _db.MateriaTurmaProfessores.Where(x => x.Professor == prof.Id);
+            var materias = new List<Materia>();
+
+            foreach (var materia in matProf)
+            {
+                materias.Add(_db.Materias.FirstOrDefault(x => x.Id == materia.Id));
+            }
+
+            var notasDoAluno = new NotasDoAlunoVM();
+            notasDoAluno.Aluno = _db.Users.Find(alunoId);
+            notasDoAluno.Materias = materias;
+            notasDoAluno.Notas = listaComNotas;
+
+            return notasDoAluno;
+        }
     }
 }

@@ -67,5 +67,30 @@ namespace Escola.Controllers
 
             return View(vm);
         }
+
+        [HttpGet]
+        [Route("Professor/ViewInfos/{alunoId}")]
+        public IActionResult ViewInfos(string alunoId)
+        {
+            var vm = new NotasDoAlunoVM();
+
+            vm = _notaRepo.GetNotasAddByProf(alunoId, User.Identity.Name);
+
+            return View(vm);
+        }
+
+        [HttpGet]
+        [Route("Professor/Edit/{notaId:int}")]
+        public IActionResult Edit(int notaId)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("Professor/Edit/{notaId:int}")]
+        public IActionResult Edit()
+        {
+            return View();
+        }
     }
 }

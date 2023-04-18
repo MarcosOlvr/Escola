@@ -8,5 +8,6 @@ namespace Escola.Repositories.Contracts
         void UpdateNota(AddNotaVM vm);
         void DeleteNota(int id);
         NotasDoAlunoVM GetNotasDoAluno(string alunoId);
+        NotasDoAlunoVM GetNotasAddByProf(string alunoId, string profUserName);
     }
 }

@@ -1,0 +1,30 @@
+﻿@model NotasDoAlunoVM
+
+@{
+    ViewData["Title"] = $"Adicionar Notas";
+}
+
+<h2 class="h2 text-center">Editar notas do aluno</h2>
+
+@foreach (var mat in Model.Materias)
+{
+    <div>
+            @foreach (var notaMat in Model.Notas)
+            {
+                @foreach (var n in notaMat)
+                {
+                    @if (mat.Id == n.MateriaFK)
+                    {
+                        <div class="p-3 d-inline-block border-1 border m-3">
+                            <h5 class="text-center">@mat.Nome</h5>
+                            <p>Nota: @n.Valor</p>
+                            <p>Faltas: @n.Faltas</p>
+                            <p>Bimestre: @n.BimestreFK</p>
+                            <a asp-action="Edit" asp-route-id="@n.Id" class="btn btn-info"><i class="bi bi-pencil-square"></i> &nbsp; Editar</a>
+                            <a asp-action="Delete" asp-route-id="@n.Id" class="btn btn-danger"><i class="bi bi-trash"></i> &nbsp; Remover</a>
+                        </div>
+                    }
+                }
+            }
+    </div>
+}
