@@ -88,9 +88,9 @@
 
 @if (User.IsInRole("Aluno"))
 {
-    <a asp-controller="Aluno" asp-action="Index" class="btn btn-secondary">Voltar</a>
+    <a asp-controller="Aluno" asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
 }
 else
 {
-    <a asp-controller="Professor" asp-action="TurmasGeral" class="btn btn-secondary">Voltar</a>
+    <a asp-controller="Professor" asp-action="TurmasGeral" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
 }

@@ -62,7 +62,7 @@ namespace Escola.Controllers
             if (ModelState.IsValid)
             {
                 _notaRepo.AddNota(vm);
-                return RedirectToAction("Aluno", new { alunoId = vm.AlunoFK });
+                return RedirectToAction("Boletim", "Aluno", new { alunoId = vm.AlunoFK });
             }
 
             return View(vm);
@@ -83,14 +83,21 @@ namespace Escola.Controllers
         [Route("Professor/Edit/{notaId:int}")]
         public IActionResult Edit(int notaId)
         {
-            return View();
+            var vm = _notaRepo.GetNota(notaId);
+            return View(vm);
         }
 
         [HttpPost]
         [Route("Professor/Edit/{notaId:int}")]
-        public IActionResult Edit()
+        public IActionResult Edit(AddNotaVM vm)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                _notaRepo.UpdateNota(vm);
+                return RedirectToAction("Boletim", "Aluno", new { alunoId = vm.AlunoFK });
+            }
+
+            return View(vm);
         }
     }
 }

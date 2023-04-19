@@ -38,7 +38,16 @@ namespace Escola.Repositories
 
         public void UpdateNota(AddNotaVM vm)
         {
-            throw new NotImplementedException();
+            var nota = _db.Notas.FirstOrDefault(x => x.Id == vm.NotaId);
+
+            nota.Valor = vm.Nota;
+            nota.Faltas = vm.Faltas;
+            nota.MateriaFK = vm.MateriaFK;
+            nota.BimestreFK = vm.BimestreFK;
+            nota.AtualizadoEm = DateTime.Now;
+
+            _db.Notas.Update(nota);
+            _db.SaveChanges();
         }
 
         public NotasDoAlunoVM GetNotasDoAluno(string alunoId)
@@ -86,6 +95,32 @@ namespace Escola.Repositories
             notasDoAluno.Notas = listaComNotas;
 
             return notasDoAluno;
+        }
+
+        public AddNotaVM GetNota(int notaId)
+        {
+            var nota = _db.Notas.Find(notaId);
+
+            var vm = new AddNotaVM();
+            var materiasProf = _db.MateriaTurmaProfessores.Where(x => x.TurmaFK == nota.TurmaFK && x.Professor == nota.ProfessorFK).ToList();
+            var materias = new List<Materia>();
+
+            foreach (var mat in materiasProf)
+            {
+                materias.Add(_db.Materias.Find(mat.MateriaFK));
+            }
+
+            vm.NotaId = nota.Id;
+            vm.Nota = nota.Valor;
+            vm.Faltas = nota.Faltas;
+            vm.MateriaFK = nota.MateriaFK;
+            vm.ProfessorFK = nota.ProfessorFK;
+            vm.AlunoFK = nota.AlunoFK;
+            vm.TurmaFK = nota.TurmaFK;
+            vm.MateriasProfessor = materias;
+            vm.BimestreFK = nota.BimestreFK;
+
+            return vm;
         }
     }
 }

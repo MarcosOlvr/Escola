@@ -1,14 +1,15 @@
 ﻿@model AddNotaVM
 
 @{
-    ViewData["Title"] = $"Adicionar Notas";
+    ViewData["Title"] = $"Editar nota";
 }
 
-<h2 class="h2 text-center">Adicionar nota ao aluno</h2>
+<h2 class="h2 text-center">Atualizar nota do aluno</h2>
 
-<form asp-action="AddNota">
+<form asp-action="Edit">
     <div>
         <input hidden asp-for="AlunoFK" />
+        <input hidden asp-for="NotaId" />
         <input hidden asp-for="TurmaFK" />
         <input hidden asp-for="ProfessorFK" />
         <input hidden asp-for="MateriasProfessor" />
@@ -40,10 +41,30 @@
                 <option value="4">Quarto</option>
             </select>
         </div>
-
         <div class="form-group p-2">
-            <input type="submit" value="Adicionar nota" class="btn btn-primary" />
-            <a asp-controller="Aluno" asp-action="Boletim" asp-route-id="@Model.AlunoFK" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
+                Editar nota
+            </button>
+            <a asp-controller="Professor" asp-action="ViewInfos" asp-route-id="@Model.AlunoFK" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Confirmação</h5>
+                    <button type="button" class="close btn" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Deseja realmente alterar a nota do aluno?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Fechar</button>
+                    <input type="submit" value="Salvar alterações" class="btn btn-primary" />
+                </div>
+            </div>
         </div>
     </div>
 </form>

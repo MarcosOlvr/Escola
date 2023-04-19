@@ -2,6 +2,7 @@
 {
     public class AddNotaVM
     {
+        public int NotaId { get; set; }
         public float Nota { get; set; }
         public int Faltas { get; set; }
         public int MateriaFK { get; set; }
