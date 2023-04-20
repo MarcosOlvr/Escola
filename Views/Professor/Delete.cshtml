@@ -1,0 +1,70 @@
+﻿@model AddNotaVM
+
+@{
+    ViewData["Title"] = $"Remover nota";
+}
+
+<h2 class="h2 text-center">Remover nota do aluno</h2>
+
+<form asp-action="Delete">
+    <div>
+        <input hidden asp-for="AlunoFK" />
+        <input hidden asp-for="NotaId" />
+        <input hidden asp-for="TurmaFK" />
+        <input hidden asp-for="ProfessorFK" />
+        <input hidden asp-for="MateriasProfessor" />
+        <div class="form-group p-2">
+            <label asp-for="Nota">Nota do aluno</label>
+            <input asp-for="Nota" disabled min="0" max="10" class="form-control">
+        </div>
+        <div class="form-group p-2">
+            <label asp-for="Faltas">Total de faltas do aluno</label>
+            <input asp-for="Faltas" disabled min="0" max="50" class="form-control">
+        </div>
+        <div class="form-group p-2">
+            <label for="exampleFormControlSelect1">Disciplina</label>
+            <select asp-for="MateriaFK" class="form-control" disabled>
+                <option value="0" disabled selected>Selecione uma matéria</option>
+                @foreach (var mat in Model.MateriasProfessor)
+                {
+                    <option value="@mat.Id">@mat.Nome</option>
+                }
+            </select>
+        </div>
+        <div class="form-group p-2">
+            <label for="exampleFormControlSelect1">Bimestre</label>
+            <select asp-for="BimestreFK" class="form-control" disabled>
+                <option value="0" disabled selected>Selecione um bimestre</option>
+                <option value="1">Primeiro</option>
+                <option value="2">Segundo</option>
+                <option value="3">Terceiro</option>
+                <option value="4">Quarto</option>
+            </select>
+        </div>
+        <div class="form-group p-2">
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
+                Remover nota
+            </button>
+            <a asp-controller="Professor" asp-action="ViewInfos" asp-route-id="@Model.AlunoFK" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Confirmação</h5>
+                    <button type="button" class="close btn" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Deseja realmente deletar a nota do aluno?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Fechar</button>
+                    <input type="submit" value="Deletar" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

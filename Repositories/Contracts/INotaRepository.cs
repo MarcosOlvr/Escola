@@ -6,7 +6,7 @@ namespace Escola.Repositories.Contracts
     {
         void AddNota(AddNotaVM vm);
         void UpdateNota(AddNotaVM vm);
-        void DeleteNota(int id);
+        bool DeleteNota(int id);
         NotasDoAlunoVM GetNotasDoAluno(string alunoId);
         NotasDoAlunoVM GetNotasAddByProf(string alunoId, string profUserName);
         AddNotaVM GetNota(int notaId);

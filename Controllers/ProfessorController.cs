@@ -99,5 +99,25 @@ namespace Escola.Controllers
 
             return View(vm);
         }
+
+        [HttpGet]
+        [Route("Professor/Delete/{notaId:int}")]
+        public IActionResult Delete(int notaId)
+        {
+            var vm = _notaRepo.GetNota(notaId);
+            return View(vm);
+        }
+
+        [HttpPost]
+        [Route("Professor/Delete/{notaId:int}")]
+        public IActionResult DeletePost(int notaId)
+        {
+            var verif = _notaRepo.DeleteNota(notaId);
+
+            if (verif)
+                return RedirectToAction("TurmasGeral");
+
+            return View();
+        }
     }
 }

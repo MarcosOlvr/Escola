@@ -31,9 +31,19 @@ namespace Escola.Repositories
             _db.SaveChanges();
         }
 
-        public void DeleteNota(int id)
+        public bool DeleteNota(int id)
         {
-            throw new NotImplementedException();
+            var nota = _db.Notas.FirstOrDefault(x=> x.Id == id);
+
+            if (nota != null)
+            {
+                _db.Notas.Remove(nota);
+                _db.SaveChanges();
+
+                return true;
+            }
+
+            return false;
         }
 
         public void UpdateNota(AddNotaVM vm)
