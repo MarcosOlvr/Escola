@@ -31,10 +31,10 @@ namespace Escola.Controllers
             return View(vm);
         }
 
-        [Route("Aluno/Boletim/{alunoId}")]
-        public IActionResult Boletim(string alunoId)
+        [Route("Aluno/Boletim/{turmaId:int}/{alunoId}")]
+        public IActionResult Boletim(int turmaId, string alunoId)
         {
-            var notas = _notaRepo.GetNotasDoAluno(alunoId);
+            var notas = _notaRepo.GetNotasDoAluno(alunoId, turmaId);
 
             if (notas == null)
                 return NotFound();

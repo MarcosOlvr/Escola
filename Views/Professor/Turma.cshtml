@@ -21,8 +21,7 @@
             <tr>
                 <td>@obj.NomeCompleto</td>
                 <td>@obj.DataNascimento.Day / @obj.DataNascimento.Month / @obj.DataNascimento.Year</td>
-                    <td><a asp-controller="Aluno" asp-action="Boletim" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-info-circle"></i> Mais informações</a></td>
-            </tr>     
+                    <td><a asp-controller="Aluno" asp-action="Boletim" asp-route-turmaId="@Model.Turma.Id" asp-route-alunoId="@obj.Id" class="btn btn-primary"><i class="bi bi-info-circle"></i> Mais informações</a></td>            </tr>     
         }
     </tbody>
 </table>

@@ -2,6 +2,7 @@
 using Escola.Models;
 using Escola.Models.ViewModels;
 using Escola.Repositories.Contracts;
+using System.Drawing.Drawing2D;
 
 namespace Escola.Repositories
 {
@@ -60,22 +61,17 @@ namespace Escola.Repositories
             _db.SaveChanges();
         }
 
-        public NotasDoAlunoVM GetNotasDoAluno(string alunoId)
+        public NotasDoAlunoVM GetNotasDoAluno(string alunoId, int turmaId)
         {
-            var portugues = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 2).ToList();
-            var matematica = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 1).ToList();
-            var historia = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 3).ToList();
-            var geografia = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 4).ToList();
-            var ciencias = _db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == 5).ToList();
-
             var notasDoAluno = new NotasDoAlunoVM();
             List<List<Nota>> todasNotas = new List<List<Nota>>();
-            todasNotas.Add(portugues);
-            todasNotas.Add(matematica);
-            todasNotas.Add(historia);
-            todasNotas.Add(geografia);
-            todasNotas.Add(ciencias);
 
+            var materiasNaTurma = _db.MateriaTurmaProfessores.Where(x => x.TurmaFK == turmaId).ToList();
+
+            foreach (var obj in materiasNaTurma)
+            {
+                todasNotas.Add(_db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == obj.MateriaFK).ToList());
+            }
 
             notasDoAluno.Aluno = _db.Users.Find(alunoId);
             notasDoAluno.Materias = _db.Materias.ToList();
