@@ -2,13 +2,9 @@
 
 namespace Escola.Repositories.Contracts
 {
-    public interface INotaRepository
+    public interface INotaRepository : IRepositoryBase<AddNotaVM>
     {
-        void AddNota(AddNotaVM vm);
-        void UpdateNota(AddNotaVM vm);
-        bool DeleteNota(int id);
         NotasDoAlunoVM GetNotasDoAluno(string alunoId, int turmaId);
         NotasDoAlunoVM GetNotasAddByProf(string alunoId, string profUserName);
-        AddNotaVM GetNota(int notaId);
     }
 }

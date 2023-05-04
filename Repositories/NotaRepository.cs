@@ -6,59 +6,13 @@ using System.Drawing.Drawing2D;
 
 namespace Escola.Repositories
 {
-    public class NotaRepository : INotaRepository
+    public class NotaRepository : RepositoryBase<AddNotaVM>, INotaRepository
     {
         private readonly ApplicationDbContext _db;
 
-        public NotaRepository(ApplicationDbContext db)
+        public NotaRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
-        }
-
-        public void AddNota(AddNotaVM vm)
-        {
-            Nota nota = new Nota();
-
-            nota.Valor = vm.Nota;
-            nota.Faltas = vm.Faltas;
-            nota.AlunoFK = vm.AlunoFK;
-            nota.ProfessorFK = vm.ProfessorFK;
-            nota.MateriaFK = vm.MateriaFK;
-            nota.TurmaFK = vm.TurmaFK;
-            nota.BimestreFK = vm.BimestreFK;
-            
-
-            _db.Notas.Add(nota);
-            _db.SaveChanges();
-        }
-
-        public bool DeleteNota(int id)
-        {
-            var nota = _db.Notas.FirstOrDefault(x=> x.Id == id);
-
-            if (nota != null)
-            {
-                _db.Notas.Remove(nota);
-                _db.SaveChanges();
-
-                return true;
-            }
-
-            return false;
-        }
-
-        public void UpdateNota(AddNotaVM vm)
-        {
-            var nota = _db.Notas.FirstOrDefault(x => x.Id == vm.NotaId);
-
-            nota.Valor = vm.Nota;
-            nota.Faltas = vm.Faltas;
-            nota.MateriaFK = vm.MateriaFK;
-            nota.BimestreFK = vm.BimestreFK;
-            nota.AtualizadoEm = DateTime.Now;
-
-            _db.Notas.Update(nota);
-            _db.SaveChanges();
         }
 
         public NotasDoAlunoVM GetNotasDoAluno(string alunoId, int turmaId)
@@ -101,32 +55,6 @@ namespace Escola.Repositories
             notasDoAluno.Notas = listaComNotas;
 
             return notasDoAluno;
-        }
-
-        public AddNotaVM GetNota(int notaId)
-        {
-            var nota = _db.Notas.Find(notaId);
-
-            var vm = new AddNotaVM();
-            var materiasProf = _db.MateriaTurmaProfessores.Where(x => x.TurmaFK == nota.TurmaFK && x.Professor == nota.ProfessorFK).ToList();
-            var materias = new List<Materia>();
-
-            foreach (var mat in materiasProf)
-            {
-                materias.Add(_db.Materias.Find(mat.MateriaFK));
-            }
-
-            vm.NotaId = nota.Id;
-            vm.Nota = nota.Valor;
-            vm.Faltas = nota.Faltas;
-            vm.MateriaFK = nota.MateriaFK;
-            vm.ProfessorFK = nota.ProfessorFK;
-            vm.AlunoFK = nota.AlunoFK;
-            vm.TurmaFK = nota.TurmaFK;
-            vm.MateriasProfessor = materias;
-            vm.BimestreFK = nota.BimestreFK;
-
-            return vm;
         }
     }
 }

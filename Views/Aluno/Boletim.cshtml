@@ -90,7 +90,13 @@
 {
     <a asp-controller="Aluno" asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
 }
-else
+
+@if (User.IsInRole("Professor"))
 {
     <a asp-controller="Professor" asp-action="TurmasGeral" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
+}
+
+else
+{
+    <a asp-controller="Dashboard" asp-action="Turmas" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
 }

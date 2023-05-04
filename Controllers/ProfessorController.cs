@@ -61,7 +61,7 @@ namespace Escola.Controllers
         {
             if (ModelState.IsValid)
             {
-                _notaRepo.AddNota(vm);
+                _notaRepo.Add(vm);
                 return RedirectToAction("Boletim", "Aluno", new { alunoId = vm.AlunoFK });
             }
 
@@ -83,7 +83,7 @@ namespace Escola.Controllers
         [Route("Professor/Edit/{notaId:int}")]
         public IActionResult Edit(int notaId)
         {
-            var vm = _notaRepo.GetNota(notaId);
+            var vm = _notaRepo.Get(notaId);
             return View(vm);
         }
 
@@ -93,7 +93,7 @@ namespace Escola.Controllers
         {
             if (ModelState.IsValid)
             {
-                _notaRepo.UpdateNota(vm);
+                _notaRepo.Update(vm);
                 return RedirectToAction("Boletim", "Aluno", new { alunoId = vm.AlunoFK });
             }
 
@@ -104,7 +104,7 @@ namespace Escola.Controllers
         [Route("Professor/Delete/{notaId:int}")]
         public IActionResult Delete(int notaId)
         {
-            var vm = _notaRepo.GetNota(notaId);
+            var vm = _notaRepo.Get(notaId);
             return View(vm);
         }
 
@@ -112,12 +112,10 @@ namespace Escola.Controllers
         [Route("Professor/Delete/{notaId:int}")]
         public IActionResult DeletePost(int notaId)
         {
-            var verif = _notaRepo.DeleteNota(notaId);
+            _notaRepo.Delete(notaId);
 
-            if (verif)
-                return RedirectToAction("TurmasGeral");
-
-            return View();
+            
+            return RedirectToAction("TurmasGeral");
         }
     }
 }
