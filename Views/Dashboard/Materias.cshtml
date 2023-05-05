@@ -1,0 +1,63 @@
+﻿@model List<Materia>
+
+@{
+    Layout = "~/Views/Dashboard/_dashboardLayout.cshtml";
+}
+
+<div class="row mt-4">
+    <div class="col-lg-12 mb-lg-0 mb-4">
+        <div class="card ">
+            <div class="card-header pb-0">
+                <div class="row">
+                    <div class="col-6">
+                        <span class="h6">Matérias</span>
+                    </div>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="text-end col-6">
+                            <a asp-action="CreateMateria" asp-controller="Dashboard" class="btn btn-sm btn-primary">Adicionar matéria</a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-items-center ">
+                    <tbody>
+                        @foreach (var obj in Model)
+                        {
+                            <tr>
+                                <td class="w-70">
+                                    <div class="d-flex px-2 py-1 align-items-center">
+                                        <div class="ms-4">
+                                            <p class="text-xs font-weight-bold mb-0">Nome</p>
+                                            <h6 class="text-sm mb-0">@obj.Nome</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="w-10">
+                                    <div class="d-flex px-2 py-1 align-items-center">
+                                        <div class="ms-4">
+                                            <a asp-action="EditMateria" asp-asp-controller="Dashboard" asp-route-materiaId="@obj.Id">
+                                                <h6 class="text-sm mb-0">Info</h6>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="w-20">
+                                    <div class="d-flex px-2 py-1 align-items-center">
+                                        <div class="ms-4">
+                                            <a asp-action="EditMateria" asp-asp-controller="Dashboard" asp-route-materiaId="@obj.Id">
+                                                <h6 class="text-sm mb-0">Editar</h6>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,21 @@
+﻿@model Materia
+
+@{
+    Layout = "~/Views/Dashboard/_dashboardLayout.cshtml";
+}
+
+<h1 class="text-center text-white">Atualizar matéria</h1>
+
+<div class="mb-6">
+    <form asp-action="EditMateria">
+        <input hidden asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="Nome" class="h6 text-white"></label>
+            <input asp-for="Nome" class="form-control" placeholder="Física">
+        </div>
+        <div>
+            <button class="btn btn-white" type="submit">Atualizar matéria</button>
+            <a asp-action="RemoveMateria" asp-controller="Dashboard" asp-route-materiaId="@Model.Id" class="btn btn-danger">Remover matéria</a>
+        </div>
+    </form>
+</div>

@@ -12,14 +12,17 @@ namespace Escola.Controllers
         private readonly IDashboardRepository _repo;
         private readonly ITurmaRepository _turmaRepo;
         private readonly IProfessorRepository _professorRepo;
+        private readonly IMateriaRepository _materiaRepo;
 
         public DashboardController(IDashboardRepository repo, 
             ITurmaRepository turmaRepo,
-            IProfessorRepository professorRepo)
+            IProfessorRepository professorRepo,
+            IMateriaRepository materiaRepo)
         {
             _repo = repo;
             _turmaRepo = turmaRepo;
             _professorRepo = professorRepo;
+            _materiaRepo = materiaRepo;
         }
 
         public IActionResult Index()
@@ -106,6 +109,9 @@ namespace Escola.Controllers
         {
             var turma = _turmaRepo.Get(turmaId);
 
+            if (turma == null)
+                return NotFound();
+
             return View(turma);
         }
 
@@ -115,6 +121,80 @@ namespace Escola.Controllers
             _turmaRepo.Delete(obj.Id);
 
             return RedirectToAction("Turmas");
+        }
+
+        [HttpGet]
+        public IActionResult Materias()
+        {
+            var materias = _materiaRepo.GetAll();
+
+            if (materias == null)
+                return NotFound();
+
+            return View(materias);
+        }
+
+        [HttpGet]
+        public IActionResult CreateMateria()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateMateria(Materia obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _materiaRepo.Add(obj);
+                return RedirectToAction("Materias");
+            }
+
+            return View(obj);
+        }
+
+        [HttpGet]
+        [Route("Dashboard/EditMateria/{materiaId:int}")]
+        public IActionResult EditMateria(int materiaId)
+        {
+            var materia = _materiaRepo.Get(materiaId);
+
+            if (materia == null)
+                return NotFound();
+
+            return View(materia);
+        }
+
+        [HttpPost]
+        public IActionResult EditMateria(Materia obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _materiaRepo.Update(obj);
+
+                return RedirectToAction("Materias");
+            }
+
+            return View(obj);
+        }
+
+        [HttpGet]
+        [Route("Dashboard/RemoveMateria/{materiaId:int}")]
+        public IActionResult RemoveMateria(int materiaId)
+        {
+            var materia = _materiaRepo.Get(materiaId);
+
+            if (materia == null)
+                return NotFound();
+
+            return View(materia);
+        }
+
+        [HttpPost]
+        public IActionResult RemoveMateriaPost(Turma obj)
+        {
+            _materiaRepo.Delete(obj.Id);
+
+            return RedirectToAction("Materias");
         }
     }
 }
