@@ -10,7 +10,7 @@
         @foreach (var obj in Model)
         {
             <div class="card text-center m-2" style="width: 18rem;">
-                <img class="card-img-top" height="250" src="https://static.vecteezy.com/ti/vetor-gratis/p2/6757124-fundo-de-padrao-sem-costura-de-volta-as-aulas-vetor.jpg" alt="Card image cap">
+                <img class="card-img-top" height="250" src="/assets/images/fundo.jpg" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">@obj.Nome</h5>
                     <a asp-controller="Professor" asp-action="Turma" asp-route-id="@obj.Id" class="btn btn-primary">Ver turma</a>

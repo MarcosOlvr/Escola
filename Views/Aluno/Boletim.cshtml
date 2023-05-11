@@ -6,7 +6,8 @@
 
 <div class="row pt-4">
     <div class="col-6">
-        <h2>Aluno(a): @Model.Aluno.NomeCompleto</h2>
+        <h3>@Model.Aluno.NomeCompleto</h3>
+        <p>@Model.Aluno.Email</p>
     </div>
 
     @if (User.IsInRole("Professor") || User.IsInRole("Admin"))
@@ -96,7 +97,7 @@
     <a asp-controller="Professor" asp-action="TurmasGeral" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
 }
 
-else
+@if (User.IsInRole("Admin"))
 {
     <a asp-controller="Dashboard" asp-action="Turmas" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
 }
