@@ -12,5 +12,6 @@ namespace Escola.Repositories.Contracts
         int GetQtyAlunos();
         int GetQtyProfessores();
         int GetQtyTurmas();
+        List<ApplicationUser> GetAllProfs();
     }
 }

@@ -124,6 +124,35 @@ namespace Escola.Controllers
         }
 
         [HttpGet]
+        [Route("Dashboard/AddProfTurma/{turmaId:int}")]
+        public IActionResult AddProfTurma(int turmaId)
+        {
+            var vm = new AddProfTurmaVM();
+            vm.Professores = _repo.GetAllProfs();
+            vm.TurmaFK = turmaId;
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult AddProfTurma(AddProfTurmaVM vm)
+        {
+            if (ModelState.IsValid)
+            {
+                _turmaRepo.AddProfTurma(vm);
+                return RedirectToAction("ViewTurma", new { turmaID = vm.TurmaFK });
+            }
+            
+            return View(vm);
+        }
+
+        [HttpGet("Dashboard/RemoverUserTurma/{userId}")]
+        public IActionResult RemoverUserTurma(string userId)
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult Materias()
         {
             var materias = _materiaRepo.GetAll();

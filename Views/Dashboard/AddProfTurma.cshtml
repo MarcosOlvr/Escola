@@ -1,0 +1,27 @@
+﻿@model AddProfTurmaVM
+
+@{
+    Layout = "~/Views/Dashboard/_dashboardLayout.cshtml";
+}
+
+<h1 class="text-center text-white">Adicionar professor a turma</h1>
+
+<div class="mb-6">
+    <form asp-action="AddProfTurma">
+        <input hidden asp-for="Professores" />
+        <input hidden asp-for="TurmaFK" />
+        <div class="form-group">
+            <label class="h6 text-white">Professor</label>
+            <select asp-for="ProfessorFK" class="form-control" placeholder="Sétimo ano">
+                <option value="0" disabled selected>Selecione uma opção</option>
+                @foreach(var prof in Model.Professores)
+                {
+                    <option value="@prof.Id">@prof.NomeCompleto</option>
+                }
+            </select>
+        </div>
+        <div>
+            <button class="btn btn-white" type="submit">Cadastrar na turma</button>
+        </div>
+    </form>
+</div>

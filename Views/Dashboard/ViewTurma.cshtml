@@ -16,8 +16,8 @@
                         @if (User.IsInRole("Admin"))
                         {
                             <div class="text-end col-6">
-                                <a asp-action="CreateTurma" asp-controller="Dashboard" class="btn btn-sm btn-primary">Adicionar professor</a>
-                                <a asp-action="CreateTurma" asp-controller="Dashboard" class="btn btn-sm btn-warning">Adicionar aluno</a>
+                                <a asp-action="AddProfTurma" asp-controller="Dashboard"  asp-route-turmaId="@Model.Turma.Id" class="btn btn-sm btn-primary">Adicionar professor</a>
+                                <a asp-action="AddAlunoTurma" asp-controller="Dashboard" class="btn btn-sm btn-warning">Adicionar aluno</a>
                             </div>
                         }
                     </div>
@@ -30,6 +30,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Data de nascimento</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center"></th>
+                                    <th class="text-secondary opacity-7"></th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                             </thead>
@@ -54,8 +55,13 @@
                                                 Aluno
                                             </p>
                                         </td>
-                                        <td class="align-middle">
+                                        <td class="text-center">
                                             <a asp-controller="Aluno" asp-action="Boletim" asp-route-turmaId="@Model.Turma.Id" asp-route-alunoId="@obj.Id" class="text-secondary font-weight-bold text-xs">Mais informações</a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a asp-action="RemoverUserTurma" asp-controller="Dashboard" asp-route-userId="@obj.Id" class="text-xs font-weight-bold mb-0 text-danger">
+                                                Remover
+                                            </a>
                                         </td>
                                     </tr>
                                 }
@@ -79,6 +85,11 @@
                                             <p class="text-xs font-weight-bold mb-0 text-center">
                                                 Professor
                                             </p>
+                                        </td>
+                                        <td class="text-center">
+                                            <a asp-action="RemoverUserTurma" asp-controller="Dashboard" asp-route-userId="@obj.Id" class="text-xs font-weight-bold mb-0 text-danger">
+                                                Remover
+                                            </a>
                                         </td>
                                     </tr>
                                 }

@@ -14,6 +14,24 @@ namespace Escola.Repositories
             _db = db;
         }
 
+        public List<ApplicationUser> GetAllProfs()
+        {
+            var profs = new List<ApplicationUser>();
+
+            foreach (var userRole in  _db.UserRoles)
+            {
+                foreach(var role in _db.Roles)
+                {
+                    if (role.Name == "Professor" && userRole.RoleId == role.Id)
+                    {
+                        profs.Add(_db.Users.Find(userRole.UserId));
+                    }
+                }
+            }
+
+            return profs;
+        }
+
         public List<TurmasDashboardVM> GetAllTurmas()
         {
             List<TurmasDashboardVM> turmas = new List<TurmasDashboardVM>();
