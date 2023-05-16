@@ -5,7 +5,6 @@ namespace Escola.Repositories.Contracts
 {
     public interface ITurmaRepository : IRepositoryBase<Turma>
     {
-        void AddProfTurma(AddProfTurmaVM vm);
-        void AddAlunoTurma();
+        void AddUserTurma(AddUserTurmaVM vm);
     }
 }

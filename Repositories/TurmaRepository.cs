@@ -14,17 +14,12 @@ namespace Escola.Repositories
             _db = db;
         }
 
-        public void AddAlunoTurma()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddProfTurma(AddProfTurmaVM vm)
+        public void AddUserTurma(AddUserTurmaVM vm)
         {
             var model = new TurmaUser();
 
             model.TurmaFK = vm.TurmaFK;
-            model.UserFK = vm.ProfessorFK;
+            model.UserFK = vm.UserFK;
 
             _db.TurmaUser.Add(model);
             _db.SaveChanges();

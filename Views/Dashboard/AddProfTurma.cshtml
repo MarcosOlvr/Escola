@@ -1,4 +1,4 @@
-﻿@model AddProfTurmaVM
+﻿@model AddUserTurmaVM
 
 @{
     Layout = "~/Views/Dashboard/_dashboardLayout.cshtml";
@@ -8,13 +8,13 @@
 
 <div class="mb-6">
     <form asp-action="AddProfTurma">
-        <input hidden asp-for="Professores" />
+        <input hidden asp-for="UserList" />
         <input hidden asp-for="TurmaFK" />
         <div class="form-group">
             <label class="h6 text-white">Professor</label>
-            <select asp-for="ProfessorFK" class="form-control" placeholder="Sétimo ano">
+            <select asp-for="UserFK" class="form-control" placeholder="Sétimo ano">
                 <option value="0" disabled selected>Selecione uma opção</option>
-                @foreach(var prof in Model.Professores)
+                @foreach(var prof in Model.UserList)
                 {
                     <option value="@prof.Id">@prof.NomeCompleto</option>
                 }

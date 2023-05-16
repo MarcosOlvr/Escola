@@ -127,19 +127,19 @@ namespace Escola.Controllers
         [Route("Dashboard/AddProfTurma/{turmaId:int}")]
         public IActionResult AddProfTurma(int turmaId)
         {
-            var vm = new AddProfTurmaVM();
-            vm.Professores = _repo.GetAllProfs();
+            var vm = new AddUserTurmaVM();
+            vm.UserList = _repo.GetAllProfs();
             vm.TurmaFK = turmaId;
 
             return View(vm);
         }
 
         [HttpPost]
-        public IActionResult AddProfTurma(AddProfTurmaVM vm)
+        public IActionResult AddProfTurma(AddUserTurmaVM vm)
         {
             if (ModelState.IsValid)
             {
-                _turmaRepo.AddProfTurma(vm);
+                _turmaRepo.AddUserTurma(vm);
                 return RedirectToAction("ViewTurma", new { turmaID = vm.TurmaFK });
             }
             
