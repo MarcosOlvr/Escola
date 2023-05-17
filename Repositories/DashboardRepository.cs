@@ -148,5 +148,10 @@ namespace Escola.Repositories
         {
             return _db.Notas.ToList().TakeLast(5).ToList();
         }
+
+        public ApplicationUser GetUser(string userId)
+        {
+            return _db.Users.Find(userId);
+        }
     }
 }
