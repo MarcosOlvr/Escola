@@ -7,18 +7,20 @@ namespace Escola.Controllers
     public class AlunoController : Controller
     {
         private readonly IAlunoRepository _alunoRepository;
+        private readonly IDashboardRepository _dashboardRepo;
         private readonly INotaRepository _notaRepo;
 
-        public AlunoController(IAlunoRepository alunoRepository, INotaRepository notaRepo)
+        public AlunoController(IAlunoRepository alunoRepository, INotaRepository notaRepo, IDashboardRepository dashboardRepo)
         {
             _alunoRepository = alunoRepository;
             _notaRepo = notaRepo;
+            _dashboardRepo = dashboardRepo; 
         }
 
         public IActionResult Index()
         {
             var turma = _alunoRepository.GetTurmaByUsername(User.Identity.Name);
-            var aluno = _alunoRepository.GetAluno(User.Identity.Name);
+            var aluno = _dashboardRepo.GetUser(User.Identity.Name);
 
             var vm = new AlunoVerTurmaVM();
 

@@ -9,16 +9,19 @@ namespace Escola.Controllers
     public class ProfessorController : Controller
     {
         private readonly IProfessorRepository _professorRepository;
+        private readonly IDashboardRepository _dashboardRepo;
         private readonly IAlunoRepository _alunoRepo;
         private readonly INotaRepository _notaRepo;
 
         public ProfessorController(IProfessorRepository professorRepository, 
             IAlunoRepository alunoRepo,
-            INotaRepository notaRepo)
+            INotaRepository notaRepo,
+            IDashboardRepository dashboardRepo)
         {
             _professorRepository = professorRepository;
             _alunoRepo = alunoRepo;
             _notaRepo = notaRepo;
+            _dashboardRepo = dashboardRepo;
         }
 
         public IActionResult TurmasGeral()
@@ -48,7 +51,7 @@ namespace Escola.Controllers
             var vm = new AddNotaVM();
             var turma = _alunoRepo.GetTurmaById(alunoId);
             vm.AlunoFK = alunoId;
-            vm.ProfessorFK = _professorRepository.GetProfessor(User.Identity.Name).Id;
+            vm.ProfessorFK = _dashboardRepo.GetUser(User.Identity.Name).Id;
             vm.TurmaFK = turma.Id;
             vm.MateriasProfessor = _professorRepository.GetMateriasProfessor(User.Identity.Name, turma.Id);
 

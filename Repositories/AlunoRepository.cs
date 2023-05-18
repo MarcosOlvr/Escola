@@ -14,11 +14,6 @@ namespace Escola.Repositories
             _db = db;
         }
 
-        public ApplicationUser GetAluno(string userName)
-        {
-            return _db.Users.FirstOrDefault(u => u.UserName == userName);
-        }
-
         public Turma GetTurmaById(string alunoId)
         {
             var turmaDoAluno = _db.TurmaUser.FirstOrDefault(x => x.UserFK ==  alunoId);

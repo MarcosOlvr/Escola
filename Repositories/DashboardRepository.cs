@@ -151,7 +151,7 @@ namespace Escola.Repositories
 
         public ApplicationUser GetUser(string userId)
         {
-            return _db.Users.Find(userId);
+            return _db.Users.FirstOrDefault(x=> x.Id == userId || x.UserName == userId);
         }
     }
 }

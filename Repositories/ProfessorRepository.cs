@@ -15,13 +15,6 @@ namespace Escola.Repositories
             _db = db;
         }
 
-        public ApplicationUser GetAluno(string alunoId)
-        {
-            var aluno = _db.Users.Find(alunoId);
-
-            return aluno;
-        }
-
         public TurmaEAlunos GetUsuariosNaTurma(int turmaId)
         {
             var turma = _db.Turmas.Find(turmaId);
@@ -95,11 +88,6 @@ namespace Escola.Repositories
             }
 
             return Materias;
-        }
-
-        public ApplicationUser GetProfessor(string userName)
-        {
-            return _db.Users.FirstOrDefault(x => x.UserName == userName);
         }
     }
 }
