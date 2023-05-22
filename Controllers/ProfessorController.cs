@@ -1,4 +1,5 @@
-﻿using Escola.Models.ViewModels;
+﻿using Escola.Models;
+using Escola.Models.ViewModels;
 using Escola.Repositories.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -64,8 +65,20 @@ namespace Escola.Controllers
         {
             if (ModelState.IsValid)
             {
-                _notaRepo.Add(vm);
-                return RedirectToAction("Boletim", "Aluno", new { alunoId = vm.AlunoFK });
+                var nota = new Nota()
+                {
+                    AlunoFK = vm.AlunoFK,
+                    BimestreFK = vm.BimestreFK,
+                    ProfessorFK = vm.ProfessorFK,
+                    Valor = vm.Nota,
+                    Faltas = vm.Faltas,
+                    MateriaFK = vm.MateriaFK,
+                    TurmaFK = vm.TurmaFK,
+                };
+
+
+                _notaRepo.Add(nota);
+                return RedirectToAction("Boletim", "Aluno", new { turmaId = vm.TurmaFK, alunoId = vm.AlunoFK });
             }
 
             return View(vm);
@@ -86,7 +99,22 @@ namespace Escola.Controllers
         [Route("Professor/Edit/{notaId:int}")]
         public IActionResult Edit(int notaId)
         {
-            var vm = _notaRepo.Get(notaId);
+            var nota = _notaRepo.Get(notaId);
+
+            var vm = new AddNotaVM()
+            {
+                AlunoFK = nota.AlunoFK,
+                BimestreFK = nota.BimestreFK,
+                Faltas = nota.Faltas,
+                Nota = nota.Valor,
+                MateriaFK = nota.MateriaFK,
+                MateriasProfessor = _professorRepository.GetMateriasProfessor(User.Identity.Name, nota.TurmaFK),
+                ProfessorFK = nota.ProfessorFK,
+                NotaId = notaId,
+                TurmaFK = nota.TurmaFK
+            };
+
+
             return View(vm);
         }
 
@@ -96,8 +124,20 @@ namespace Escola.Controllers
         {
             if (ModelState.IsValid)
             {
-                _notaRepo.Update(vm);
-                return RedirectToAction("Boletim", "Aluno", new { alunoId = vm.AlunoFK });
+                var nota = new Nota()
+                {
+                    Id = vm.NotaId,
+                    AlunoFK = vm.AlunoFK,
+                    BimestreFK = vm.BimestreFK,
+                    ProfessorFK = vm.ProfessorFK,
+                    Valor = vm.Nota,
+                    Faltas = vm.Faltas,
+                    MateriaFK = vm.MateriaFK,
+                    TurmaFK = vm.TurmaFK,
+                };
+
+                _notaRepo.Update(nota);
+                return RedirectToAction("Boletim", "Aluno", new { turmaId = vm.TurmaFK, alunoId = vm.AlunoFK });
             }
 
             return View(vm);

@@ -6,7 +6,7 @@ using System.Drawing.Drawing2D;
 
 namespace Escola.Repositories
 {
-    public class NotaRepository : RepositoryBase<AddNotaVM>, INotaRepository
+    public class NotaRepository : RepositoryBase<Nota>, INotaRepository
     {
         private readonly ApplicationDbContext _db;
 
