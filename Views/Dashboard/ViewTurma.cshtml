@@ -17,7 +17,7 @@
                         {
                             <div class="text-end col-6">
                                 <a asp-action="AddProfTurma" asp-controller="Dashboard"  asp-route-turmaId="@Model.Turma.Id" class="btn btn-sm btn-primary">Adicionar professor</a>
-                                <a asp-action="AddAlunoTurma" asp-controller="Dashboard" class="btn btn-sm btn-warning">Adicionar aluno</a>
+                                <a asp-action="AddAlunoTurma" asp-controller="Dashboard" asp-route-turmaId="@Model.Turma.Id" class="btn btn-sm btn-warning">Adicionar aluno</a>
                             </div>
                         }
                     </div>

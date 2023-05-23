@@ -134,8 +134,18 @@ namespace Escola.Controllers
             return View(vm);
         }
 
+        [HttpGet("Dashboard/AddAlunoTurma/{turmaId:int}")]
+        public IActionResult AddAlunoTurma(int turmaId)
+        {
+            var vm = new AddUserTurmaVM();
+            vm.UserList = _repo.GetAllAlunosSemTurma();
+            vm.TurmaFK = turmaId;
+
+            return View(vm);
+        }
+
         [HttpPost]
-        public IActionResult AddProfTurma(AddUserTurmaVM vm)
+        public IActionResult AddUserTurma(AddUserTurmaVM vm)
         {
             if (ModelState.IsValid)
             {
@@ -145,6 +155,7 @@ namespace Escola.Controllers
             
             return View(vm);
         }
+
 
         [HttpGet("Dashboard/RemoverUserTurma/{turmaId:int}/{userId}")]
         public IActionResult RemoverUserTurma(string userId, int turmaId)

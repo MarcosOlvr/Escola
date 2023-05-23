@@ -14,6 +14,28 @@ namespace Escola.Repositories
             _db = db;
         }
 
+        public List<ApplicationUser> GetAllAlunosSemTurma()
+        {
+            var alunosSemTurma = new List<ApplicationUser>();
+
+            foreach (var userRole in _db.UserRoles)
+            {
+                foreach (var role in _db.Roles)
+                {
+                    if (role.Name == "Aluno" && userRole.RoleId == role.Id)
+                    {
+                        var verif = _db.TurmaUser.FirstOrDefault(x => x.UserFK == userRole.UserId);
+
+                        if (verif == null)
+                            alunosSemTurma.Add(_db.Users.FirstOrDefault(x=> x.Id == userRole.UserId));
+                    }
+                        
+                }
+            }
+
+            return alunosSemTurma;
+        }
+
         public List<ApplicationUser> GetAllProfs()
         {
             var profs = new List<ApplicationUser>();
