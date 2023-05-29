@@ -87,7 +87,6 @@ namespace Escola.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
             [DataType(DataType.Date)]
             [DisplayFormat(DataFormatString = "dd-MM-yy", ApplyFormatInEditMode = true)]
             [Display(Name = "Data de nascimento")]

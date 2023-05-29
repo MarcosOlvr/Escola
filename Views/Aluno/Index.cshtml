@@ -8,8 +8,8 @@
     <div class="d-flex justify-content-center p-2">
         <div class="card text-center m-2" style="width: 18rem;">
             <img class="card-img-top" height="250" src="/assets/images/fundo.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">@Model.Turma.Nome</h5>
+            <div class="card-body bg-primary">
+                <h5 class="card-title text-white">@Model.Turma.Nome</h5>
                 <a asp-controller="Aluno" asp-action="Boletim" asp-route-turmaId="@Model.Turma.Id" asp-route-alunoId="@Model.Aluno.Id" class="btn btn-primary">Ver turma</a>
             </div>
         </div>
