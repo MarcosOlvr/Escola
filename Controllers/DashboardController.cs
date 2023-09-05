@@ -185,6 +185,47 @@ namespace Escola.Controllers
             return View(vm);
         }
 
+        [HttpGet("Dashboard/Professor/{turmaId:int}/{userId}")]
+        public IActionResult EditProfTurma(string userId, int turmaId)
+        {   
+            var turmaUser = _turmaRepo.GetTurmaUser(turmaId, userId);
+            var userList = new List<ApplicationUser>();
+            userList.Add(_repo.GetUser(userId));
+            var todasMaterias = _materiaRepo.GetAll();
+
+            var materiasDoProfessor = _professorRepo.GetMateriasProfessor(_repo.GetUser(userId).UserName, turmaId);
+
+            foreach (var materia in materiasDoProfessor)
+            {
+                if (todasMaterias.Contains(materia))
+                {
+                    todasMaterias.Remove(materia);
+                }
+            }
+
+            var vm = new MateriaTurmaProfessorVM
+            {
+                ProfessorId = turmaUser.UserFK,
+                TurmaId = turmaUser.TurmaFK,
+                UserList = userList,
+                Materias = todasMaterias
+        };
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult EditProfTurmaPost(MateriaTurmaProfessorVM vm)
+        {
+            if (ModelState.IsValid)
+            {
+                _turmaRepo.AddTurmaMateriaProfessor(vm);
+                return RedirectToAction("ViewTurma", new { turmaID = vm.TurmaId });
+            }
+
+            return View(vm);
+        }
+
         [HttpGet]
         public IActionResult Materias()
         {
@@ -194,6 +235,14 @@ namespace Escola.Controllers
                 return NotFound();
 
             return View(materias);
+        }
+
+        [HttpGet("Dashboard/Materia/Info/{materiaId:int}")]
+        public IActionResult InfoMateria(int materiaId)
+        {
+            var vm = _materiaRepo.TurmasComMateria(materiaId);
+
+            return View(vm);
         }
 
         [HttpGet]

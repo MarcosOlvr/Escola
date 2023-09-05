@@ -14,6 +14,17 @@ namespace Escola.Repositories
             _db = db;
         }
 
+        public void AddTurmaMateriaProfessor(MateriaTurmaProfessorVM vm)
+        {
+            var model = new MateriaTurmaProfessor();
+            model.Professor = vm.ProfessorId;
+            model.MateriaFK = vm.MateriaId;
+            model.TurmaFK = vm.TurmaId;
+
+            _db.MateriaTurmaProfessores.Add(model);
+            _db.SaveChanges();
+        }
+
         public void AddUserTurma(AddUserTurmaVM vm)
         {
             var model = new TurmaUser();

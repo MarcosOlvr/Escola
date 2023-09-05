@@ -86,7 +86,11 @@
                                                 Professor
                                             </p>
                                         </td>
-                                        <td></td>
+                                        <td class="text-center">
+                                            <a asp-action="EditProfTurma" asp-controller="Dashboard" asp-route-turmaId="@Model.Turma.Id" asp-route-userId="@obj.Id" class="text-xs font-weight-bold mb-0">
+                                                Editar
+                                            </a>
+                                        </td>
                                         <td class="text-center">
                                             <a asp-action="RemoverUserTurma" asp-controller="Dashboard" asp-route-turmaId="@Model.Turma.Id" asp-route-userId="@obj.Id" class="text-xs font-weight-bold mb-0 text-danger">
                                                 Remover

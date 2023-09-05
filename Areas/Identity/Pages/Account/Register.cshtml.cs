@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Escola.Areas.Identity.Pages.Account
 {
@@ -92,6 +93,10 @@ namespace Escola.Areas.Identity.Pages.Account
             [Display(Name = "Data de nascimento")]
             public DateTime DataNascimento { get; set; }
 
+            [Required]
+            [Display(Name = "Cargo")]
+            public string Role { get; set; }
+
             [Display(Name = "Número de telefone")]
             public string PhoneNumber { get; set; }
 
@@ -120,6 +125,8 @@ namespace Escola.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            IEnumerable<IdentityRole> roles = _roleManager.Roles.ToList();
+            ViewData["Role"] = new SelectList(roles, "Name", "Name");
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -134,6 +141,7 @@ namespace Escola.Areas.Identity.Pages.Account
                 user.DataNascimento = Input.DataNascimento;
                 user.PhoneNumber = Input.PhoneNumber;
 
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -141,6 +149,8 @@ namespace Escola.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    await _userManager.AddToRoleAsync(user, Input.Role);
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

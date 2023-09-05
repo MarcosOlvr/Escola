@@ -7,7 +7,7 @@
 
 <h3 class="text-white text-center">Registe um usuário</h3>
 
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-5">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <hr />
@@ -30,6 +30,13 @@
                 <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="phonenumber" aria-required="true" />
                 <label asp-for="Input.PhoneNumber"></label>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-floating m-2">
+                <select asp-for="Input.Role" class="form-control" asp-items="ViewBag.Role">
+                    <option selected disabled>Selecione um cargo</option>
+                </select>
+                <label asp-for="Input.Role"></label>
+                <span asp-validation-for="Input.Role" class="text-danger"></span>
             </div>
             <div class="form-floating m-2">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />

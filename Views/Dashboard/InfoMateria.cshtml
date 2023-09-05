@@ -1,4 +1,4 @@
-﻿@model List<Materia>
+﻿@model List<Turma>
 
 @{
     Layout = "~/Views/Dashboard/_dashboardLayout.cshtml";
@@ -10,12 +10,12 @@
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col-6">
-                        <span class="h6">Matérias</span>
+                        <span class="h6">Turmas com a matéria cadastrada</span>
                     </div>
                     @if (User.IsInRole("Admin"))
                     {
                         <div class="text-end col-6">
-                            <a asp-action="CreateMateria" asp-controller="Dashboard" class="btn btn-sm btn-primary">Adicionar matéria</a>
+                            <a asp-action="AddMateriaTurma" asp-controller="Dashboard" class="btn btn-sm btn-primary">Adicionar turma</a>
                         </div>
                     }
                 </div>
@@ -34,20 +34,11 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="w-10">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div class="ms-4">
-                                            <a asp-action="InfoMateria" asp-asp-controller="Dashboard" asp-route-materiaId="@obj.Id">
-                                                <h6 class="text-sm mb-0">Info</h6>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </td>
                                 <td class="w-20">
                                     <div class="d-flex px-2 py-1 align-items-center">
                                         <div class="ms-4">
-                                            <a asp-action="EditMateria" asp-asp-controller="Dashboard" asp-route-materiaId="@obj.Id">
-                                                <h6 class="text-sm mb-0">Editar</h6>
+                                            <a asp-action="RemoverMateriaTurma" asp-asp-controller="Dashboard" asp-route-materiaId="@obj.Id">
+                                                <h6 class="text-sm mb-0 text-danger">Remover</h6>
                                             </a>
                                         </div>
                                     </div>
