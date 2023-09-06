@@ -37,7 +37,7 @@ namespace Escola.Controllers
             if (turmaId == 0)
                 return NotFound();
 
-            var usuariosNaTurma = _professorRepository.GetUsuariosNaTurma(turmaId);
+            var usuariosNaTurma = _professorRepository.UsuariosNaTurma(turmaId);
 
             if (usuariosNaTurma == null)
                 return NotFound();
@@ -50,11 +50,11 @@ namespace Escola.Controllers
         public IActionResult AddNota(string alunoId)
         {
             var vm = new AddNotaVM();
-            var turma = _alunoRepo.GetTurmaById(alunoId);
+            var turma = _alunoRepo.TurmaById(alunoId);
             vm.AlunoFK = alunoId;
             vm.ProfessorFK = _dashboardRepo.GetUser(User.Identity.Name).Id;
             vm.TurmaFK = turma.Id;
-            vm.MateriasProfessor = _professorRepository.GetMateriasProfessor(User.Identity.Name, turma.Id);
+            vm.MateriasProfessor = _professorRepository.MateriasDoProfessorNaTurma(User.Identity.Name, turma.Id);
 
             return View(vm);
         }
@@ -90,7 +90,7 @@ namespace Escola.Controllers
         {
             var vm = new NotasDoAlunoVM();
 
-            vm = _notaRepo.GetNotasAddByProf(alunoId, User.Identity.Name);
+            vm = _notaRepo.NotasAddPeloProfessor(alunoId, User.Identity.Name);
 
             return View(vm);
         }
@@ -108,7 +108,7 @@ namespace Escola.Controllers
                 Faltas = nota.Faltas,
                 Nota = nota.Valor,
                 MateriaFK = nota.MateriaFK,
-                MateriasProfessor = _professorRepository.GetMateriasProfessor(User.Identity.Name, nota.TurmaFK),
+                MateriasProfessor = _professorRepository.MateriasDoProfessorNaTurma(User.Identity.Name, nota.TurmaFK),
                 ProfessorFK = nota.ProfessorFK,
                 NotaId = notaId,
                 TurmaFK = nota.TurmaFK

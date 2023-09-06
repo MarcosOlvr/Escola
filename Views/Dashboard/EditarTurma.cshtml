@@ -4,16 +4,17 @@
     Layout = "~/Views/Dashboard/_dashboardLayout.cshtml";
 }
 
-<h1 class="text-center text-white">Criar turma</h1>
+<h1 class="text-center text-white">Editar turma</h1>
 
 <div class="mb-6">
-    <form asp-action="CreateTurmaPost">
+    <form asp-action="EditarTurma">
+        <input hidden asp-for="Id" />
         <div class="form-group">
             <label asp-for="Nome" class="h6 text-white"></label>
             <input asp-for="Nome" class="form-control" placeholder="Sétimo ano">
         </div>
         <div>
-            <button class="btn btn-white" type="submit">Cadastrar turma</button>
+            <button class="btn btn-warning" type="submit">Editar turma</button>
         </div>
     </form>
 </div>

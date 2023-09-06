@@ -14,7 +14,7 @@ namespace Escola.Repositories
             _db = db;
         }
 
-        public List<ApplicationUser> GetAllAlunosSemTurma()
+        public List<ApplicationUser> AlunosSemTurma()
         {
             var alunosSemTurma = new List<ApplicationUser>();
 
@@ -36,7 +36,7 @@ namespace Escola.Repositories
             return alunosSemTurma;
         }
 
-        public List<ApplicationUser> GetAllProfs()
+        public List<ApplicationUser> GetProfessores()
         {
             var profs = new List<ApplicationUser>();
 
@@ -54,7 +54,7 @@ namespace Escola.Repositories
             return profs;
         }
 
-        public List<TurmasDashboardVM> GetAllTurmas()
+        public List<TurmasDashboardVM> GetTurmas()
         {
             List<TurmasDashboardVM> turmas = new List<TurmasDashboardVM>();
             
@@ -89,11 +89,11 @@ namespace Escola.Repositories
             return turmas;
         }
 
-        public List<ApplicationUser> GetAlunosNota()
+        public List<ApplicationUser> NotasDoAluno()
         {
             List<ApplicationUser> alunos = new List<ApplicationUser>();
 
-            var ultimasNotas = GetUltimasNotas();
+            var ultimasNotas = UltimasNotas();
 
             foreach (var obj in ultimasNotas)
             {
@@ -111,7 +111,7 @@ namespace Escola.Repositories
             return _db.Materias.ToList().Take(5).ToList();
         }
 
-        public int GetQtyAlunos()
+        public int QtyAlunos()
         {
             List<ApplicationUser> users = _db.Users.ToList();
             var alunos = new List<ApplicationUser>();
@@ -136,7 +136,7 @@ namespace Escola.Repositories
             return alunos.Count;
         }
 
-        public int GetQtyProfessores()
+        public int QtyProfessores()
         {
             List<ApplicationUser> users = _db.Users.ToList();
             var professor = new List<ApplicationUser>();
@@ -161,12 +161,12 @@ namespace Escola.Repositories
             return professor.Count;
         }
 
-        public int GetQtyTurmas()
+        public int QtyTurmas()
         {
             return _db.Turmas.ToList().Count;
         }
 
-        public List<Nota> GetUltimasNotas()
+        public List<Nota> UltimasNotas()
         {
             return _db.Notas.ToList().TakeLast(5).ToList();
         }

@@ -15,7 +15,7 @@ namespace Escola.Repositories
             _db = db;
         }
 
-        public NotasDoAlunoVM GetNotasDoAluno(string alunoId, int turmaId)
+        public NotasDoAlunoVM NotasDoAluno(string alunoId, int turmaId)
         {
             var notasDoAluno = new NotasDoAlunoVM();
             List<List<Nota>> todasNotas = new List<List<Nota>>();
@@ -34,7 +34,7 @@ namespace Escola.Repositories
             return notasDoAluno;
         }
 
-        public NotasDoAlunoVM GetNotasAddByProf(string alunoId, string profUserName)
+        public NotasDoAlunoVM NotasAddPeloProfessor(string alunoId, string profUserName)
         {
             var prof = _db.Users.FirstOrDefault(x => x.UserName == profUserName);
 

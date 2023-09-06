@@ -14,7 +14,7 @@ namespace Escola.Repositories
             _db = db;
         }
 
-        public Turma GetTurmaById(string alunoId)
+        public Turma TurmaById(string alunoId)
         {
             var turmaDoAluno = _db.TurmaUser.FirstOrDefault(x => x.UserFK ==  alunoId);
             var turma = _db.Turmas.FirstOrDefault(x => x.Id == turmaDoAluno.TurmaFK);
@@ -22,7 +22,7 @@ namespace Escola.Repositories
             return turma;
         }
 
-        public Turma GetTurmaByUsername(string userName)
+        public Turma TurmaByUsername(string userName)
         {
             var aluno = _db.Users.FirstOrDefault(u => u.UserName == userName);
 

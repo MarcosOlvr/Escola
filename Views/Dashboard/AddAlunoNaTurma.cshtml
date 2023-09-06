@@ -4,14 +4,14 @@
     Layout = "~/Views/Dashboard/_dashboardLayout.cshtml";
 }
 
-<h1 class="text-center text-white">Adicionar professor a turma</h1>
+<h1 class="text-center text-white">Adicionar aluno a turma</h1>
 
 <div class="mb-6">
-    <form asp-action="AddUserTurma">
+    <form asp-action="AddUserNaTurma">
         <input hidden asp-for="UserList" />
         <input hidden asp-for="TurmaFK" />
         <div class="form-group">
-            <label class="h6 text-white">Professor</label>
+            <label class="h6 text-white">Aluno</label>
             <select asp-for="UserFK" class="form-control">
                 <option value="0" disabled selected>Selecione uma opção</option>
                 @foreach(var prof in Model.UserList)
@@ -19,8 +19,6 @@
                     <option value="@prof.Id">@prof.NomeCompleto</option>
                 }
             </select>
-            <label class="h6 text-white">Matérias</label>
-            
         </div>
         <div>
             <button class="btn btn-white" type="submit">Cadastrar na turma</button>

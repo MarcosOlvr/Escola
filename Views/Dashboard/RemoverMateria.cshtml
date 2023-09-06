@@ -1,21 +1,21 @@
-﻿@model Turma
+﻿@model Materia
 
 @{
     Layout = "~/Views/Dashboard/_dashboardLayout.cshtml";
 }
 
-<h1 class="text-center text-white">Remover turma</h1>
+<h1 class="text-center text-white">Remover matéria</h1>
 
 <div class="mb-6">
-    <form asp-action="RemoveTurmaPost">
+    <form asp-action="RemoverMateriaPost">
         <input hidden asp-for="Id" />
         <div class="form-group">
             <label asp-for="Nome" class="h6 text-white"></label>
-            <input asp-for="Nome" class="form-control" placeholder="Sétimo ano" disabled>
+            <input asp-for="Nome" class="form-control" placeholder="Física" disabled>
         </div>
         <div>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
-                Remover turma
+                Remover matéria
             </button>
         </div>
         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -28,7 +28,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Deseja realmente deletar a nota do aluno?
+                        Deseja realmente excluir a matéria?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Fechar</button>

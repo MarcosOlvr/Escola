@@ -25,7 +25,7 @@ namespace Escola.Repositories
             _db.SaveChanges();
         }
 
-        public void AddUserTurma(AddUserTurmaVM vm)
+        public void AddUserNaTurma(AddUserTurmaVM vm)
         {
             var model = new TurmaUser();
 
@@ -36,14 +36,14 @@ namespace Escola.Repositories
             _db.SaveChanges();
         }
 
-        public TurmaUser GetTurmaUser(int turmaId, string userId)
+        public TurmaUser GetTurmaDoUser(int turmaId, string userId)
         {
             var turmaUser = _db.TurmaUser.Where(x => x.UserFK == userId && x.TurmaFK == turmaId).FirstOrDefault();
 
             return turmaUser;
         }
 
-        public void RemoverUserTurma(int turmaId, string userId)
+        public void RemoverUserDaTurma(int turmaId, string userId)
         {
             var turmaUser = _db.TurmaUser.Where(x => x.UserFK == userId && x.TurmaFK == turmaId).FirstOrDefault();
 

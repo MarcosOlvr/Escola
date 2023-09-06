@@ -15,7 +15,7 @@ namespace Escola.Repositories
             _db = db;
         }
 
-        public TurmaEAlunos GetUsuariosNaTurma(int turmaId)
+        public TurmaEAlunos UsuariosNaTurma(int turmaId)
         {
             var turma = _db.Turmas.Find(turmaId);
 
@@ -73,7 +73,7 @@ namespace Escola.Repositories
             return turmas;
         }
 
-        public List<Materia> GetMateriasProfessor(string userName, int turmaId)
+        public List<Materia> MateriasDoProfessorNaTurma(string userName, int turmaId)
         {
             var prof = _db.Users.FirstOrDefault(x => x.UserName == userName);
 

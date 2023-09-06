@@ -6,7 +6,7 @@ namespace Escola.Repositories.Contracts
     public interface IProfessorRepository
     {
         List<Turma> GetTurmas(string userName);
-        TurmaEAlunos GetUsuariosNaTurma(int turmaId);
-        List<Materia> GetMateriasProfessor(string userName, int turmaId);
+        TurmaEAlunos UsuariosNaTurma(int turmaId);
+        List<Materia> MateriasDoProfessorNaTurma(string userName, int turmaId);
     }
 }

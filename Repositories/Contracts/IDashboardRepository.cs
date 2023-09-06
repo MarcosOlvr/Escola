@@ -5,15 +5,15 @@ namespace Escola.Repositories.Contracts
 {
     public interface IDashboardRepository
     {
-        List<Nota> GetUltimasNotas();
+        List<Nota> UltimasNotas();
         List<Materia> GetMaterias();
-        List<ApplicationUser> GetAlunosNota();
-        List<TurmasDashboardVM> GetAllTurmas();
-        int GetQtyAlunos();
-        int GetQtyProfessores();
-        int GetQtyTurmas();
-        List<ApplicationUser> GetAllProfs();
-        List<ApplicationUser> GetAllAlunosSemTurma();
+        List<ApplicationUser> NotasDoAluno();
+        List<TurmasDashboardVM> GetTurmas();
+        int QtyAlunos();
+        int QtyProfessores();
+        int QtyTurmas();
+        List<ApplicationUser> GetProfessores();
+        List<ApplicationUser> AlunosSemTurma();
         ApplicationUser GetUser(string userId);
     }
 }

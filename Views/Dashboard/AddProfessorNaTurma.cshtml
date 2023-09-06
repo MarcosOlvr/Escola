@@ -4,25 +4,26 @@
     Layout = "~/Views/Dashboard/_dashboardLayout.cshtml";
 }
 
-<h1 class="text-center text-white">Remover usuário da turma</h1>
+<h1 class="text-center text-white">Adicionar professor a turma</h1>
 
 <div class="mb-6">
-    <form asp-action="RemoverUserTurmaPost">
+    <form asp-action="AddUserNaTurma">
         <input hidden asp-for="UserList" />
         <input hidden asp-for="TurmaFK" />
-        <input hidden asp-for="UserFK" />
         <div class="form-group">
             <label class="h6 text-white">Professor</label>
-            <select asp-for="UserFK" class="form-control" placeholder="Sétimo ano" disabled>
+            <select asp-for="UserFK" class="form-control">
                 <option value="0" disabled selected>Selecione uma opção</option>
-                @foreach (var prof in Model.UserList)
+                @foreach(var prof in Model.UserList)
                 {
                     <option value="@prof.Id">@prof.NomeCompleto</option>
                 }
             </select>
+            <label class="h6 text-white">Matérias</label>
+            
         </div>
         <div>
-            <button class="btn btn-danger" type="submit">Remover da turma</button>
+            <button class="btn btn-white" type="submit">Cadastrar na turma</button>
         </div>
     </form>
 </div>
