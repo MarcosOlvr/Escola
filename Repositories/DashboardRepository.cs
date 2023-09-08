@@ -168,12 +168,17 @@ namespace Escola.Repositories
 
         public List<Nota> UltimasNotas()
         {
-            return _db.Notas.ToList().TakeLast(5).ToList();
+            return _db.Notas.ToList().TakeLast(5).Reverse().ToList();
         }
 
         public ApplicationUser GetUser(string userId)
         {
             return _db.Users.FirstOrDefault(x=> x.Id == userId || x.UserName == userId);
+        }
+
+        public int QtyUsuarios()
+        {
+            return _db.Users.ToList().Count;
         }
     }
 }

@@ -34,6 +34,7 @@ namespace Escola.Controllers
             vm.QtyTurmas = _repo.QtyTurmas();
             vm.QtyProfessores = _repo.QtyProfessores();
             vm.QtyAlunos = _repo.QtyAlunos();
+            vm.QtyUsuarios = _repo.QtyUsuarios();
 
             return View(vm);
         }
