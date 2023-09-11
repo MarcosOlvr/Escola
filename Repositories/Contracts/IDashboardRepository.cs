@@ -13,7 +13,7 @@ namespace Escola.Repositories.Contracts
         int QtyProfessores();
         int QtyTurmas();
         int QtyUsuarios();
-        List<ApplicationUser> GetProfessores();
+        List<ApplicationUser> GetProfessores(int turmaId);
         List<ApplicationUser> AlunosSemTurma();
         ApplicationUser GetUser(string userId);
     }

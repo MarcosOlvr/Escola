@@ -15,7 +15,7 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <div class="text-end col-6">
-                            <a asp-action="CreateMateria" asp-controller="Dashboard" class="btn btn-sm btn-primary">Adicionar matéria</a>
+                            <a asp-action="CriarMateria" asp-controller="Dashboard" class="btn btn-sm btn-primary">Adicionar matéria</a>
                         </div>
                     }
                 </div>
@@ -46,7 +46,7 @@
                                 <td class="w-20">
                                     <div class="d-flex px-2 py-1 align-items-center">
                                         <div class="ms-4">
-                                            <a asp-action="EditMateria" asp-asp-controller="Dashboard" asp-route-materiaId="@obj.Id">
+                                            <a asp-action="EditarMateria" asp-asp-controller="Dashboard" asp-route-materiaId="@obj.Id">
                                                 <h6 class="text-sm mb-0">Editar</h6>
                                             </a>
                                         </div>

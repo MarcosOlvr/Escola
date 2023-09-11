@@ -36,7 +36,7 @@ namespace Escola.Repositories
             return alunosSemTurma;
         }
 
-        public List<ApplicationUser> GetProfessores()
+        public List<ApplicationUser> GetProfessores(int turmaId)
         {
             var profs = new List<ApplicationUser>();
 
@@ -49,6 +49,14 @@ namespace Escola.Repositories
                         profs.Add(_db.Users.Find(userRole.UserId));
                     }
                 }
+            }
+
+            foreach (var prof in profs.ToList())
+            {
+                var verif = _db.TurmaUser.Where(x => x.UserFK == prof.Id && x.TurmaFK == turmaId).FirstOrDefault();
+
+                if (verif != null)
+                    profs.Remove(prof);
             }
 
             return profs;

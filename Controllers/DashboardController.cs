@@ -80,7 +80,7 @@ namespace Escola.Controllers
         }
 
         [HttpGet]
-        [Route("Dashboard/EditTurma/{turmaId:int}")]
+        [Route("Dashboard/EditarTurma/{turmaId:int}")]
         public IActionResult EditarTurma(int turmaId)
         {
             var turma = _turmaRepo.Get(turmaId);
@@ -92,7 +92,7 @@ namespace Escola.Controllers
         }
 
         [HttpPost]
-        [Route("Dashboard/EditTurma/{turmaId:int}")]
+        [Route("Dashboard/EditarTurma/{turmaId:int}")]
         public IActionResult EditarTurma(Turma obj)
         {
             if (ModelState.IsValid)
@@ -106,7 +106,7 @@ namespace Escola.Controllers
         }
 
         [HttpGet]
-        [Route("Dashboard/RemoveTurma/{turmaId:int}")]
+        [Route("Dashboard/RemoverTurma/{turmaId:int}")]
         public IActionResult RemoverTurma(int turmaId)
         {
             var turma = _turmaRepo.Get(turmaId);
@@ -126,12 +126,12 @@ namespace Escola.Controllers
         }
 
         [HttpGet]
-        [Route("Dashboard/AddProfTurma/{turmaId:int}")]
+        [Route("Dashboard/AddProfessorNaTurma/{turmaId:int}")]
         public IActionResult AddProfessorNaTurma(int turmaId)
         {
             var vm = new AddUserTurmaVM();
-            vm.UserList = _repo.GetProfessores();
             vm.TurmaFK = turmaId;
+            vm.UserList = _repo.GetProfessores(turmaId);
 
             return View(vm);
         }

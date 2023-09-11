@@ -1,5 +1,6 @@
 ﻿using Escola.Models.ViewModels;
 using Escola.Repositories.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Escola.Controllers
@@ -17,6 +18,7 @@ namespace Escola.Controllers
             _dashboardRepo = dashboardRepo; 
         }
 
+        [Authorize(Roles = "Aluno, Admin")]
         public IActionResult Index()
         {
             var turma = _alunoRepository.TurmaByUsername(User.Identity.Name);

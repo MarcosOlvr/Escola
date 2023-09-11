@@ -15,7 +15,7 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <div class="text-end col-6">
-                            <a asp-action="AddMateriaTurma" asp-controller="Dashboard" class="btn btn-sm btn-primary">Adicionar turma</a>
+                            <a asp-action="AddMateriaNaTurma" asp-controller="Dashboard" class="btn btn-sm btn-primary">Adicionar turma</a>
                         </div>
                     }
                 </div>
@@ -37,9 +37,7 @@
                                 <td class="w-20">
                                     <div class="d-flex px-2 py-1 align-items-center">
                                         <div class="ms-4">
-                                            <a asp-action="RemoverMateriaTurma" asp-asp-controller="Dashboard" asp-route-materiaId="@obj.Id">
-                                                <h6 class="text-sm mb-0 text-danger">Remover</h6>
-                                            </a>
+                                            <h6 class="text-sm mb-0 text-danger">Remover materia desta turma</h6>
                                         </div>
                                     </div>
                                 </td>
