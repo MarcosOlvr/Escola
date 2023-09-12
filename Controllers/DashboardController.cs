@@ -242,7 +242,10 @@ namespace Escola.Controllers
         [HttpGet("Dashboard/Materia/Info/{materiaId:int}")]
         public IActionResult InfoMateria(int materiaId)
         {
-            var vm = _materiaRepo.TurmasComMateria(materiaId);
+            var vm = new MateriaNaTurmaDTO();
+                
+            vm.Turmas = _materiaRepo.TurmasComMateria(materiaId);
+            vm.Materia = _materiaRepo.Get(materiaId);
 
             return View(vm);
         }

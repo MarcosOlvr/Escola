@@ -38,7 +38,7 @@ namespace Escola.Controllers
         [Route("Aluno/Boletim/{turmaId:int}/{alunoId}")]
         public IActionResult Boletim(int turmaId, string alunoId)
         {
-            var notas = _notaRepo.NotasDoAluno(alunoId, turmaId);
+            NotasDoAlunoVM notas = _notaRepo.NotasDoAluno(alunoId, turmaId);
 
             if (notas == null)
                 return NotFound();

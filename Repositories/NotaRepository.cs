@@ -21,14 +21,16 @@ namespace Escola.Repositories
             List<List<Nota>> todasNotas = new List<List<Nota>>();
 
             var materiasNaTurma = _db.MateriaTurmaProfessores.Where(x => x.TurmaFK == turmaId).ToList();
+            List<Materia> materias = new List<Materia>();
 
             foreach (var obj in materiasNaTurma)
             {
                 todasNotas.Add(_db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == obj.MateriaFK).ToList());
+                materias.Add(_db.Materias.Where(x => x.Id == obj.MateriaFK).FirstOrDefault());
             }
 
             notasDoAluno.Aluno = _db.Users.Find(alunoId);
-            notasDoAluno.Materias = _db.Materias.ToList();
+            notasDoAluno.Materias = materias;
             notasDoAluno.Notas = todasNotas;
 
             return notasDoAluno;
