@@ -14,14 +14,29 @@ namespace Escola.Repositories
             _db = db;
         }
 
-        public void AddMateriaNaTurma(MateriaNaTurmaDTO materia)
+        public void RemoverMateriaDeUmProfessor(MateriaTurmaProfessorVM obj)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                var model = new MateriaTurmaProfessor
+                {
+                    MateriaFK = obj.MateriaId,
+                    Professor = obj.ProfessorId,
+                    TurmaFK = obj.TurmaId,
+                };
 
-        public void RemoverMateriaDaTurma(int materiaId)
-        {
-            throw new NotImplementedException();
+                var materiaTurmaProfessor = _db.MateriaTurmaProfessores.Where(x => x.Professor == model.Professor
+                    && x.MateriaFK == model.MateriaFK
+                    && x.TurmaFK == model.TurmaFK)
+                    .FirstOrDefault();
+
+                _db.MateriaTurmaProfessores.Remove(materiaTurmaProfessor);
+                _db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public List<Turma> TurmasComMateria(int materiaId)

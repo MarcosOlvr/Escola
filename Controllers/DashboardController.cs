@@ -195,9 +195,9 @@ namespace Escola.Controllers
             userList.Add(_repo.GetUser(userId));
             var todasMaterias = _materiaRepo.GetAll();
 
-            var MateriasDoProfessorNaTurma = _professorRepo.MateriasDoProfessorNaTurma(_repo.GetUser(userId).UserName, turmaId);
+            var materiasDoProfessorNaTurma = _professorRepo.MateriasDoProfessorNaTurma(_repo.GetUser(userId).UserName, turmaId);
 
-            foreach (var materia in MateriasDoProfessorNaTurma)
+            foreach (var materia in materiasDoProfessorNaTurma)
             {
                 if (todasMaterias.Contains(materia))
                 {
@@ -222,6 +222,38 @@ namespace Escola.Controllers
             if (ModelState.IsValid)
             {
                 _turmaRepo.AddTurmaMateriaProfessor(vm);
+                return RedirectToAction("ViewTurma", new { turmaID = vm.TurmaId });
+            }
+
+            return View(vm);
+        }
+
+        [HttpGet("Dashboard/Professor/RemoverMateria/{turmaId:int}/{userId}")]
+        public IActionResult RemoverMateriaDoProfessor(int turmaId, string userId)
+        {
+            var turmaUser = _turmaRepo.GetTurmaDoUser(turmaId, userId);
+            var userList = new List<ApplicationUser>();
+            userList.Add(_repo.GetUser(userId));
+
+            var materiasDoProfessorNaTurma = _professorRepo.MateriasDoProfessorNaTurma(_repo.GetUser(userId).UserName, turmaId);
+
+            var vm = new MateriaTurmaProfessorVM
+            {
+                ProfessorId = turmaUser.UserFK,
+                TurmaId = turmaUser.TurmaFK,
+                UserList = userList,
+                Materias = materiasDoProfessorNaTurma
+            };
+
+            return View(vm);    
+        }
+
+        [HttpPost]
+        public IActionResult RemoverMateriaDoProfessorPost(MateriaTurmaProfessorVM vm)
+        {
+            if (ModelState.IsValid)
+            {
+                _materiaRepo.RemoverMateriaDeUmProfessor(vm);
                 return RedirectToAction("ViewTurma", new { turmaID = vm.TurmaId });
             }
 
