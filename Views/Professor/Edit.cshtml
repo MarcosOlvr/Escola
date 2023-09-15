@@ -45,7 +45,14 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
                 Editar nota
             </button>
-            <a asp-controller="Professor" asp-action="ViewInfos" asp-route-id="@Model.AlunoFK" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
+            @if (User.IsInRole("Professor"))
+            {
+                <a asp-controller="Professor" asp-action="ViewInfos" asp-route-id="@Model.AlunoFK" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-controller="Professor" asp-action="ViewInfosAdmin" asp-route-turmaId="@Model.TurmaFK" asp-route-alunoId="@Model.AlunoFK" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
+            }
         </div>
     </div>
     <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

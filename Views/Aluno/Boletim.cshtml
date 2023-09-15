@@ -10,7 +10,7 @@
         <p>@Model.Aluno.Email</p>
     </div>
 
-    @if (User.IsInRole("Professor") || User.IsInRole("Admin"))
+    @if (User.IsInRole("Professor"))
     {
         <div class="col-6 text-end">
             <a asp-controller="Professor" asp-action="AddNota" asp-route-id="@Model.Aluno.Id" class="btn btn-primary m-1">
@@ -21,71 +21,88 @@
             </a>
         </div>
     }
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="col-6 text-end">
+            <a asp-controller="Professor" asp-action="ViewInfosAdmin" asp-route-turmaId="@Model.Turma.Id" asp-route-alunoId="@Model.Aluno.Id" class="btn btn-info m-1">
+                <i class="bi bi-pencil-square"></i> &nbsp; Informações
+            </a>
+        </div>
+    }
+
 </div>
 <br />
 
-<table class="table table-bordered border-dark text-center">
-    <thead>
-        <tr>
-            <th scope="col" rowspan="2">Materias</th>
-            <th scope="col" colspan="2">1º Bim.</th>
-            <th scope="col" colspan="2">2º Bim.</th>
-            <th scope="col" colspan="2">3º Bim.</th>
-            <th scope="col" colspan="2">4º Bim.</th>
-            <th scope="col" rowspan="2">Resultado final</th>
-        </tr>
-        <tr>
-            <th scope="col">Nota</th>
-            <th scope="col" class="text-danger">Faltas</th>
-            <th scope="col">Nota</th>
-            <th scope="col" class="text-danger">Faltas</th>
-            <th scope="col">Nota</th>
-            <th scope="col" class="text-danger">Faltas</th>
-            <th scope="col">Nota</th>
-            <th scope="col" class="text-danger">Faltas</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var mat in Model.Materias)
-         {
+<div class="table-responsive">
+    <table class="table table-bordered border-dark text-center">
+        <thead>
             <tr>
-                <th scope="row">@mat.Nome</th>
+                <th scope="col" rowspan="2">Materias</th>
+                <th scope="col" colspan="2">1º Bim.</th>
+                <th scope="col" colspan="2">2º Bim.</th>
+                <th scope="col" colspan="2">3º Bim.</th>
+                <th scope="col" colspan="2">4º Bim.</th>
+                <th scope="col" rowspan="2">Resultado final</th>
+            </tr>
+            <tr>
+                <th scope="col">Nota</th>
+                <th scope="col" class="text-danger">Faltas</th>
+                <th scope="col">Nota</th>
+                <th scope="col" class="text-danger">Faltas</th>
+                <th scope="col">Nota</th>
+                <th scope="col" class="text-danger">Faltas</th>
+                <th scope="col">Nota</th>
+                <th scope="col" class="text-danger">Faltas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mat in Model.Materias)
+            {
+                <tr>
+                    <th scope="row">@mat.Nome</th>
 
-                @foreach (var notas in Model.Notas)
-                {
-                    @foreach (var obj in notas)
+                    @foreach (var notas in Model.Notas)
                     {
-                        if (mat.Id == obj.MateriaFK)
+                        @foreach (var obj in notas.OrderBy(x => x.BimestreFK).ToList())
                         {
-                            switch (obj.BimestreFK)
+                            if (mat.Id == obj.MateriaFK)
                             {
-                                case 1:
-                                    <td>@obj.Valor</td>
-                                    <td>@obj.Faltas</td>
-                                    break;
+                                switch (obj.BimestreFK)
+                                {
+                                    case 1:
+                                        <td>@obj.Valor</td>
+                                        <td>@obj.Faltas</td>
+                                        break;
 
-                                case 2:
-                                    <td>@obj.Valor</td>
-                                    <td>@obj.Faltas</td>
-                                    break;
+                                    case 2:
+                                        <td>@obj.Valor</td>
+                                        <td>@obj.Faltas</td>
+                                        break;
 
-                                case 3:
-                                    <td>@obj.Valor</td>
-                                    <td>@obj.Faltas</td>
-                                    break;
+                                    case 3:
+                                        <td>@obj.Valor</td>
+                                        <td>@obj.Faltas</td>
+                                        break;
 
-                                case 4:
-                                    <td>@obj.Valor</td>
-                                    <td>@obj.Faltas</td>
-                                    break;
+                                    case 4:
+                                        <td>@obj.Valor</td>
+                                        <td>@obj.Faltas</td>
+                                        break;
+
+                                    default:
+                                        <td></td>
+                                        <td></td>
+                                        break;
+                                }
                             }
                         }
                     }
-                }
-            </tr>
-        }
-    </tbody>
-</table>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @if (User.IsInRole("Aluno"))
 {

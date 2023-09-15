@@ -32,6 +32,7 @@ namespace Escola.Repositories
             notasDoAluno.Aluno = _db.Users.Find(alunoId);
             notasDoAluno.Materias = materias;
             notasDoAluno.Notas = todasNotas;
+            notasDoAluno.Turma = _db.Turmas.Find(turmaId);
 
             return notasDoAluno;
         }

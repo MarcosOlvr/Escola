@@ -13,16 +13,19 @@ namespace Escola.Controllers
         private readonly IDashboardRepository _dashboardRepo;
         private readonly IAlunoRepository _alunoRepo;
         private readonly INotaRepository _notaRepo;
+        private readonly IMateriaRepository _materiaRepo;
 
         public ProfessorController(IProfessorRepository professorRepository, 
             IAlunoRepository alunoRepo,
             INotaRepository notaRepo,
-            IDashboardRepository dashboardRepo)
+            IDashboardRepository dashboardRepo,
+            IMateriaRepository materiaRepo)
         {
             _professorRepository = professorRepository;
             _alunoRepo = alunoRepo;
             _notaRepo = notaRepo;
             _dashboardRepo = dashboardRepo;
+            _materiaRepo = materiaRepo;
         }
 
         public IActionResult TurmasGeral()
@@ -95,12 +98,43 @@ namespace Escola.Controllers
             return View(vm);
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        [Route("Professor/ViewInfosAdmin/{turmaId:int}/{alunoId}")]
+        public IActionResult ViewInfosAdmin(int turmaId, string alunoId)
+        {
+            var vm = new NotasDoAlunoVM();
+
+            vm = _notaRepo.NotasDoAluno(alunoId, turmaId);
+
+            return View(vm);
+        }
+
         [HttpGet]
         [Route("Professor/Edit/{notaId:int}")]
         public IActionResult Edit(int notaId)
         {
             var nota = _notaRepo.Get(notaId);
 
+            if (User.IsInRole("Professor"))
+            {
+                var vmProfessor = new AddNotaVM()
+                {
+                    AlunoFK = nota.AlunoFK,
+                    BimestreFK = nota.BimestreFK,
+                    Faltas = nota.Faltas,
+                    Nota = nota.Valor,
+                    MateriaFK = nota.MateriaFK,
+                    MateriasProfessor = _professorRepository.MateriasDoProfessorNaTurma(User.Identity.Name, nota.TurmaFK),
+                    ProfessorFK = nota.ProfessorFK,
+                    NotaId = notaId,
+                    TurmaFK = nota.TurmaFK
+                };
+
+                return View(vmProfessor);
+            }
+
+            // Admin vai ter acesso a todas as matérias quando precisar editar a nota
             var vm = new AddNotaVM()
             {
                 AlunoFK = nota.AlunoFK,
@@ -108,12 +142,11 @@ namespace Escola.Controllers
                 Faltas = nota.Faltas,
                 Nota = nota.Valor,
                 MateriaFK = nota.MateriaFK,
-                MateriasProfessor = _professorRepository.MateriasDoProfessorNaTurma(User.Identity.Name, nota.TurmaFK),
+                MateriasProfessor = _materiaRepo.GetAll(),
                 ProfessorFK = nota.ProfessorFK,
                 NotaId = notaId,
                 TurmaFK = nota.TurmaFK
             };
-
 
             return View(vm);
         }
