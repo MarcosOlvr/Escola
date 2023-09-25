@@ -16,7 +16,7 @@
             <a asp-controller="Professor" asp-action="AddNota" asp-route-id="@Model.Aluno.Id" class="btn btn-primary m-1">
                 <i class="bi bi-plus-circle"></i> &nbsp; Adicionar nota
             </a>
-            <a asp-controller="Professor" asp-action="ViewInfos" asp-route-id="@Model.Aluno.Id" class="btn btn-info m-1">
+            <a asp-controller="Professor" asp-action="ViewInfos" asp-route-alunoId="@Model.Aluno.Id" asp-route-turmaId="@Model.Turma.Id" class="btn btn-info m-1">
                 <i class="bi bi-pencil-square"></i> &nbsp; Informações
             </a>
         </div>
@@ -32,7 +32,8 @@
     }
 
 </div>
-<br />
+
+<hr />
 
 <div class="table-responsive">
     <table class="table table-bordered border-dark text-center">
@@ -103,6 +104,7 @@
         </tbody>
     </table>
 </div>
+<br />
 
 @if (User.IsInRole("Aluno"))
 {

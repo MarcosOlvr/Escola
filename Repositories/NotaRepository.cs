@@ -37,19 +37,25 @@ namespace Escola.Repositories
             return notasDoAluno;
         }
 
-        public NotasDoAlunoVM NotasAddPeloProfessor(string alunoId, string profUserName)
+        public NotasDoAlunoVM NotasAddPeloProfessor(string alunoId, string profUserName, int turmaId)
         {
             var prof = _db.Users.FirstOrDefault(x => x.UserName == profUserName);
 
             List<List<Nota>> listaComNotas = new List<List<Nota>>();
             listaComNotas.Add(_db.Notas.Where(x => x.AlunoFK == alunoId && x.ProfessorFK == prof.Id).ToList());
 
-            var matProf = _db.MateriaTurmaProfessores.Where(x => x.Professor == prof.Id).ToList();
+            var materiasDoProf = _db.MateriaTurmaProfessores.Where(x => x.Professor == prof.Id && x.TurmaFK == turmaId).ToList();
             var materias = new List<Materia>();
 
-            foreach (var materia in matProf)
+            foreach (var materia in materiasDoProf)
             {
-                var materiaObj = _db.Materias.Find(materia.MateriaFK);
+                var materiaObj = _db.Materias.FirstOrDefault(x => x.Id == materia.MateriaFK);
+
+                if (materias.Contains(materiaObj))
+                {
+                    continue;
+                }
+                
                 materias.Add(materiaObj);
             }
 

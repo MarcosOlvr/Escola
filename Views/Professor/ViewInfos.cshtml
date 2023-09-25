@@ -6,22 +6,22 @@
 
 <h2 class="h2 text-center">Editar notas do aluno</h2>
 
-@foreach (var mat in Model.Materias)
+@foreach (var materia in Model.Materias)
 {
     <div>
-            @foreach (var notaMat in Model.Notas)
+            @foreach (var notasPorMateria in Model.Notas)
             {
-                @foreach (var n in notaMat)
+                @foreach (var nota in notasPorMateria)
                 {
-                    @if (mat.Id == n.MateriaFK)
+                    @if (materia.Id == nota.MateriaFK)
                     {
                         <div class="p-3 d-inline-block border-1 border m-2">
-                            <h5 class="text-center">@mat.Nome</h5>
-                            <p>Nota: @n.Valor</p>
-                            <p>Faltas: @n.Faltas</p>
-                            <p>Bimestre: @n.BimestreFK</p>
-                            <a asp-action="Edit" asp-route-id="@n.Id" class="btn btn-info"><i class="bi bi-pencil-square"></i> &nbsp; Editar</a>
-                            <a asp-action="Delete" asp-route-id="@n.Id" class="btn btn-danger"><i class="bi bi-trash3"></i> &nbsp; Remover</a>
+                            <h5 class="text-center">@materia.Nome</h5>
+                            <p>Nota: @nota.Valor</p>
+                            <p>Faltas: @nota.Faltas</p>
+                            <p>Bimestre: @nota.BimestreFK</p>
+                            <a asp-action="Edit" asp-route-id="@nota.Id" class="btn btn-info"><i class="bi bi-pencil-square"></i> &nbsp; Editar</a>
+                            <a asp-action="Delete" asp-route-id="@nota.Id" class="btn btn-danger"><i class="bi bi-trash3"></i> &nbsp; Remover</a>
                         </div>
                     }
                 }

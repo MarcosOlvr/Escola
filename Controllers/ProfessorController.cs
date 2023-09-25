@@ -88,12 +88,12 @@ namespace Escola.Controllers
         }
 
         [HttpGet]
-        [Route("Professor/ViewInfos/{alunoId}")]
-        public IActionResult ViewInfos(string alunoId)
+        [Route("Professor/ViewInfos/{turmaId:int}/{alunoId}")]
+        public IActionResult ViewInfos(string alunoId, int turmaId)
         {
             var vm = new NotasDoAlunoVM();
 
-            vm = _notaRepo.NotasAddPeloProfessor(alunoId, User.Identity.Name);
+            vm = _notaRepo.NotasAddPeloProfessor(alunoId, User.Identity.Name, turmaId);
 
             return View(vm);
         }
