@@ -188,5 +188,26 @@ namespace Escola.Repositories
         {
             return _db.Users.ToList().Count;
         }
+
+        public List<ApplicationUser> GetUsers()
+        {
+            return _db.Users.ToList();
+        }
+
+        public void UpdateUser(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteUser(string userId)
+        {
+            var user = _db.Users.FirstOrDefault(x => x.Id == userId);
+
+            if (user != null)
+            {
+                _db.Users.Remove(user);
+                _db.SaveChanges();
+            }
+        }
     }
 }

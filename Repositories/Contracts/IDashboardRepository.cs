@@ -16,5 +16,8 @@ namespace Escola.Repositories.Contracts
         List<ApplicationUser> GetProfessores(int turmaId);
         List<ApplicationUser> AlunosSemTurma();
         ApplicationUser GetUser(string userId);
+        List<ApplicationUser> GetUsers();
+        void UpdateUser(ApplicationUser user);
+        void DeleteUser(string userId);
     }
 }

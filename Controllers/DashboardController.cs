@@ -345,5 +345,45 @@ namespace Escola.Controllers
 
             return RedirectToAction("Materias");
         }
+
+        [HttpGet("Dashboard/Usuarios")]
+        public IActionResult Usuarios()
+        {
+            var usuarios = _repo.GetUsers();
+
+            return View(usuarios);
+        }
+
+        [HttpGet("Dashboard/Usuario/{userId}")]
+        public IActionResult Usuario(string userId) 
+        {
+            var user = _repo.GetUser(userId);
+
+            return View(user);
+        }
+
+        [HttpGet("Dashboard/Usuario/Edit/{userId}")]
+        public IActionResult EditarUsuario(string userId)
+        {
+            return View();
+        }
+
+        [HttpPost("Dashboard/Usuario/Edit/{userId}")]
+        public IActionResult EditarUsuario(ApplicationUser user)
+        {
+            return View();
+        }
+
+        [HttpGet("Dashboard/Usuario/Remover/{userId}")]
+        public IActionResult RemoverUsuario(string userId)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RemoverUsuarioPost(string userId)
+        {
+            return View();
+        }
     }
 }
