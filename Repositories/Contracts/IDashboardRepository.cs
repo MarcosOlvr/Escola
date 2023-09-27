@@ -17,7 +17,7 @@ namespace Escola.Repositories.Contracts
         List<ApplicationUser> AlunosSemTurma();
         ApplicationUser GetUser(string userId);
         List<ApplicationUser> GetUsers();
-        void UpdateUser(ApplicationUser user);
+        void UpdateUser(UserDTO dto);
         void DeleteUser(string userId);
     }
 }

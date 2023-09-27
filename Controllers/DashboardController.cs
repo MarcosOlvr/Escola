@@ -359,31 +359,56 @@ namespace Escola.Controllers
         {
             var user = _repo.GetUser(userId);
 
-            return View(user);
+            var dto = new UserDTO
+            {
+                Id = user.Id,
+                Email = user.Email,
+                NomeCompleto = user.NomeCompleto,
+                DataNascimento = user.DataNascimento,
+                NumeroTelefone = user.PhoneNumber,
+                DataCadastro = user.DataCadastro
+            };
+
+            return View(dto);
         }
 
         [HttpGet("Dashboard/Usuario/Edit/{userId}")]
         public IActionResult EditarUsuario(string userId)
         {
-            return View();
+            var user = _repo.GetUser(userId);
+
+            var dto = new UserDTO
+            {
+                Id = user.Id,
+                Email = user.Email,
+                NomeCompleto = user.NomeCompleto,
+                DataNascimento = user.DataNascimento,
+                NumeroTelefone = user.PhoneNumber,
+                DataCadastro = user.DataCadastro
+            };
+
+            return View(dto);
         }
 
         [HttpPost("Dashboard/Usuario/Edit/{userId}")]
-        public IActionResult EditarUsuario(ApplicationUser user)
+        public IActionResult EditarUsuario(UserDTO dto)
         {
-            return View();
-        }
+            if (ModelState.IsValid)
+            {
+                _repo.UpdateUser(dto);
+                
+                return RedirectToAction("Usuarios");
+            }
 
-        [HttpGet("Dashboard/Usuario/Remover/{userId}")]
-        public IActionResult RemoverUsuario(string userId)
-        {
-            return View();
+            return View(dto);
         }
 
         [HttpPost]
-        public IActionResult RemoverUsuarioPost(string userId)
+        public IActionResult RemoverUsuarioPost(UserDTO dto)
         {
-            return View();
+            _repo.DeleteUser(dto.Id);
+
+            return RedirectToAction("Usuarios");
         }
     }
 }

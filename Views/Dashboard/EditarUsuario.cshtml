@@ -1,0 +1,44 @@
+﻿@model UserDTO
+
+@{
+    Layout = "~/Views/Dashboard/_dashboardLayout.cshtml";
+}
+
+<div class="mb-6">
+    <div class="text-white text-center">
+        <h2 class="text-white">@Model.NomeCompleto</h2>
+        <span>@((int.Parse(DateTime.Now.ToString("yyyyMMdd")) - int.Parse(Model.DataNascimento.ToString("yyyyMMdd"))) / 10000) anos</span>
+    </div>
+    <hr class="bg-white" />
+    <div class="mb-6">
+        <form asp-action="EditarUsuario">
+            <input hidden asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="NomeCompleto" class="h6 text-white">Nome completo</label>
+                <input asp-for="NomeCompleto" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="h6 text-dark"></label>
+                <input asp-for="Email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroTelefone" class="h6 text-dark">Número de telefone</label>
+                <input asp-for="NumeroTelefone" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="DataNascimento" class="h6 text-black">Data de nascimento</label>
+                <input asp-for="DataNascimento" class="form-control" disabled>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataCadastro" class="h6 text-black">Data de cadastro</label>
+                <input asp-for="DataCadastro" class="form-control" disabled>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                <a class="btn btn-secondary" asp-action="Usuario" asp-controller="Dashboard" asp-route-userId="@Model.Id">
+                    Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

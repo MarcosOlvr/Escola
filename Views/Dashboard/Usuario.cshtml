@@ -1,4 +1,4 @@
-﻿@model ApplicationUser
+﻿@model UserDTO
 
 @{
     Layout = "~/Views/Dashboard/_dashboardLayout.cshtml";
@@ -11,14 +11,15 @@
     </div>
     <hr  class="bg-white"/>
     <div class="mb-6">
-        <form>
+        <form asp-action="RemoverUsuarioPost">
+            <input hidden asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Email" class="h6 text-white"></label>
                 <input asp-for="Email" class="form-control" disabled>
             </div>
             <div class="form-group">
-                <label asp-for="PhoneNumber" class="h6 text-dark">Número de telefone</label>
-                <input asp-for="PhoneNumber" class="form-control" disabled>
+                <label asp-for="NumeroTelefone" class="h6 text-dark">Número de telefone</label>
+                <input asp-for="NumeroTelefone" class="form-control" disabled>
             </div>
             <div class="form-group">
                 <label asp-for="DataNascimento" class="h6 text-black">Data de nascimento</label>
@@ -29,8 +30,29 @@
                 <input asp-for="DataCadastro" class="form-control" disabled>
             </div>
             <div>
-                <a asp-action="" asp-controller="" asp-route-userId="@Model.Id" class="btn btn-primary">Modificar informações do usuário</a>
-                <a asp-action="" asp-controller="" asp-route-userId="@Model.Id" class="btn btn-danger">Remover usuário</a>
+                <a asp-action="EditarUsuario" asp-controller="Dashboard" asp-route-userId="@Model.Id" class="btn btn-primary">Modificar informações do usuário</a>
+                <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalLong"> 
+                    Remover usuário
+                </button>
+            </div>
+            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Confirmação</h5>
+                            <button type="button" class="close btn" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Deseja realmente remover este usuário?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Fechar</button>
+                            <input type="submit" value="Remover" class="btn btn-danger" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

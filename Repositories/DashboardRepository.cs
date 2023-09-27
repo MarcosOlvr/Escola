@@ -209,5 +209,20 @@ namespace Escola.Repositories
                 _db.SaveChanges();
             }
         }
+
+        public void UpdateUser(UserDTO dto)
+        {
+            var user = _db.Users.FirstOrDefault(x => x.Id == dto.Id);
+
+            if (user != null)
+            {
+                user.NomeCompleto = dto.NomeCompleto;
+                user.Email = dto.Email;
+                user.PhoneNumber = dto.NumeroTelefone;
+
+                _db.Users.Update(user);
+                _db.SaveChanges();
+            }
+        }
     }
 }
