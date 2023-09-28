@@ -347,11 +347,25 @@ namespace Escola.Controllers
         }
 
         [HttpGet("Dashboard/Usuarios")]
-        public IActionResult Usuarios()
+        public IActionResult Usuarios(int pg=1)
         {
             var usuarios = _repo.GetUsers();
 
-            return View(usuarios);
+            const int pageSize = 2;
+            if (pg < 1)
+                pg = 1;
+
+            int recsCount = usuarios.Count();
+
+            var pager = new Pager(recsCount, pg, pageSize);
+
+            int recSkip = (pg - 1) * pageSize;
+
+            var data = usuarios.Skip(recSkip).Take(pageSize).ToList();
+
+            this.ViewBag.Pager = pager; 
+
+            return View(data);
         }
 
         [HttpGet("Dashboard/Usuario/{userId}")]
