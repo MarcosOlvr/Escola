@@ -351,7 +351,7 @@ namespace Escola.Controllers
         {
             var usuarios = _repo.GetUsers();
 
-            const int pageSize = 2;
+            const int pageSize = 10;
             if (pg < 1)
                 pg = 1;
 
