@@ -67,6 +67,9 @@
                     {
                         @foreach (var obj in notas.OrderBy(x => x.BimestreFK).ToList())
                         {
+                            var notaFinal = 0.0;
+                            notaFinal += obj.Valor;
+
                             if (mat.Id == obj.MateriaFK)
                             {
                                 switch (obj.BimestreFK)
@@ -89,6 +92,19 @@
                                     case 4:
                                         <td>@obj.Valor</td>
                                         <td>@obj.Faltas</td>
+                                        if (notaFinal >= 24)
+                                        {
+                                            <td>Aprovado</td>
+                                        }
+                                        else if (notaFinal < 24 && notaFinal > 20)
+                                        {
+                                            <td>Recuperação</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Reprovado</td>
+                                        }
+
                                         break;
 
                                     default:
