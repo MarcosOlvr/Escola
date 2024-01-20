@@ -17,54 +17,68 @@ namespace Escola.Repositories
 
         public NotasDoAlunoVM NotasDoAluno(string alunoId, int turmaId)
         {
-            var notasDoAluno = new NotasDoAlunoVM();
-            List<List<Nota>> todasNotas = new List<List<Nota>>();
-
-            var materiasNaTurma = _db.MateriaTurmaProfessores.Where(x => x.TurmaFK == turmaId).ToList();
-            List<Materia> materias = new List<Materia>();
-
-            foreach (var obj in materiasNaTurma)
+            try
             {
-                todasNotas.Add(_db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == obj.MateriaFK).ToList());
-                materias.Add(_db.Materias.Where(x => x.Id == obj.MateriaFK).FirstOrDefault());
+                var notasDoAluno = new NotasDoAlunoVM();
+                List<List<Nota>> todasNotas = new List<List<Nota>>();
+
+                var materiasNaTurma = _db.MateriaTurmaProfessores.Where(x => x.TurmaFK == turmaId).ToList();
+                List<Materia> materias = new List<Materia>();
+
+                foreach (var obj in materiasNaTurma)
+                {
+                    todasNotas.Add(_db.Notas.Where(x => x.AlunoFK == alunoId && x.MateriaFK == obj.MateriaFK).ToList());
+                    materias.Add(_db.Materias.Where(x => x.Id == obj.MateriaFK).FirstOrDefault());
+                }
+
+                notasDoAluno.Aluno = _db.Users.Find(alunoId);
+                notasDoAluno.Materias = materias;
+                notasDoAluno.Notas = todasNotas;
+                notasDoAluno.Turma = _db.Turmas.Find(turmaId);
+
+                return notasDoAluno;
             }
-
-            notasDoAluno.Aluno = _db.Users.Find(alunoId);
-            notasDoAluno.Materias = materias;
-            notasDoAluno.Notas = todasNotas;
-            notasDoAluno.Turma = _db.Turmas.Find(turmaId);
-
-            return notasDoAluno;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public NotasDoAlunoVM NotasAddPeloProfessor(string alunoId, string profUserName, int turmaId)
         {
-            var prof = _db.Users.FirstOrDefault(x => x.UserName == profUserName);
-
-            List<List<Nota>> listaComNotas = new List<List<Nota>>();
-            listaComNotas.Add(_db.Notas.Where(x => x.AlunoFK == alunoId && x.ProfessorFK == prof.Id).ToList());
-
-            var materiasDoProf = _db.MateriaTurmaProfessores.Where(x => x.Professor == prof.Id && x.TurmaFK == turmaId).ToList();
-            var materias = new List<Materia>();
-
-            foreach (var materia in materiasDoProf)
+            try
             {
-                var materiaObj = _db.Materias.FirstOrDefault(x => x.Id == materia.MateriaFK);
+                var prof = _db.Users.FirstOrDefault(x => x.UserName == profUserName);
 
-                if (materias.Contains(materiaObj))
+                List<List<Nota>> listaComNotas = new List<List<Nota>>();
+                listaComNotas.Add(_db.Notas.Where(x => x.AlunoFK == alunoId && x.ProfessorFK == prof.Id).ToList());
+
+                var materiasDoProf = _db.MateriaTurmaProfessores.Where(x => x.Professor == prof.Id && x.TurmaFK == turmaId).ToList();
+                var materias = new List<Materia>();
+
+                foreach (var materia in materiasDoProf)
                 {
-                    continue;
+                    var materiaObj = _db.Materias.FirstOrDefault(x => x.Id == materia.MateriaFK);
+
+                    if (materias.Contains(materiaObj))
+                    {
+                        continue;
+                    }
+
+                    materias.Add(materiaObj);
                 }
-                
-                materias.Add(materiaObj);
+
+                var notasDoAluno = new NotasDoAlunoVM();
+                notasDoAluno.Aluno = _db.Users.Find(alunoId);
+                notasDoAluno.Materias = materias;
+                notasDoAluno.Notas = listaComNotas;
+
+                return notasDoAluno;
             }
-
-            var notasDoAluno = new NotasDoAlunoVM();
-            notasDoAluno.Aluno = _db.Users.Find(alunoId);
-            notasDoAluno.Materias = materias;
-            notasDoAluno.Notas = listaComNotas;
-
-            return notasDoAluno;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

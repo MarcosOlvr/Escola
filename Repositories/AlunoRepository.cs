@@ -16,21 +16,35 @@ namespace Escola.Repositories
 
         public Turma TurmaById(string alunoId)
         {
-            var turmaDoAluno = _db.TurmaUser.FirstOrDefault(x => x.UserFK ==  alunoId);
-            var turma = _db.Turmas.FirstOrDefault(x => x.Id == turmaDoAluno.TurmaFK);
+            try
+            {
+                var turmaDoAluno = _db.TurmaUser.FirstOrDefault(x => x.UserFK == alunoId);
+                var turma = _db.Turmas.FirstOrDefault(x => x.Id == turmaDoAluno.TurmaFK);
 
-            return turma;
+                return turma;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public Turma TurmaByUsername(string userName)
         {
-            var aluno = _db.Users.FirstOrDefault(u => u.UserName == userName);
+            try
+            {
+                var aluno = _db.Users.FirstOrDefault(u => u.UserName == userName);
 
-            var turmaDoAluno = _db.TurmaUser.FirstOrDefault(x => x.UserFK == aluno.Id);
+                var turmaDoAluno = _db.TurmaUser.FirstOrDefault(x => x.UserFK == aluno.Id);
 
-            var turma = _db.Turmas.FirstOrDefault(x => x.Id == turmaDoAluno.TurmaFK);
+                var turma = _db.Turmas.FirstOrDefault(x => x.Id == turmaDoAluno.TurmaFK);
 
-            return turma;
+                return turma;
+            }
+            catch (Exception ex)
+            { 
+                throw new Exception(ex.Message); 
+            }
         }
     }
 }
