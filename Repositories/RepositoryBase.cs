@@ -18,30 +18,65 @@ namespace Escola.Repositories
 
         public void Add(TEntity obj)
         {
-            _DbSet.Add(obj);
-            _AppDbContext.SaveChanges();
+            try
+            {
+                _DbSet.Add(obj);
+                _AppDbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void Delete(int id)
         {
-            _DbSet.Remove(Get(id));
-            _AppDbContext.SaveChanges();
+            try
+            {
+                _DbSet.Remove(Get(id));
+                _AppDbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public List<TEntity> GetAll()
         {
-            return _DbSet.ToList();
+            try
+            {
+                return _DbSet.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public TEntity Get(int id)
         {
-            return _DbSet.Find(id);
+            try
+            {
+                return _DbSet.Find(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void Update(TEntity obj)
         {
-            _DbSet.Update(obj);
-            _AppDbContext.SaveChanges();
+            try
+            {
+                _DbSet.Update(obj);
+                _AppDbContext.SaveChanges();
+            }
+            catch (Exception ex) 
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

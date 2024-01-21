@@ -201,27 +201,41 @@ namespace Escola.Repositories
 
         public void DeleteUser(string userId)
         {
-            var user = _db.Users.FirstOrDefault(x => x.Id == userId);
-
-            if (user != null)
+            try
             {
-                _db.Users.Remove(user);
-                _db.SaveChanges();
+                var user = _db.Users.FirstOrDefault(x => x.Id == userId);
+
+                if (user != null)
+                {
+                    _db.Users.Remove(user);
+                    _db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
         public void UpdateUser(UserDTO dto)
         {
-            var user = _db.Users.FirstOrDefault(x => x.Id == dto.Id);
-
-            if (user != null)
+            try
             {
-                user.NomeCompleto = dto.NomeCompleto;
-                user.Email = dto.Email;
-                user.PhoneNumber = dto.NumeroTelefone;
+                var user = _db.Users.FirstOrDefault(x => x.Id == dto.Id);
 
-                _db.Users.Update(user);
-                _db.SaveChanges();
+                if (user != null)
+                {
+                    user.NomeCompleto = dto.NomeCompleto;
+                    user.Email = dto.Email;
+                    user.PhoneNumber = dto.NumeroTelefone;
+
+                    _db.Users.Update(user);
+                    _db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }
