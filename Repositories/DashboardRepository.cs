@@ -194,29 +194,6 @@ namespace Escola.Repositories
             return _db.Users.ToList();
         }
 
-        public void UpdateUser(ApplicationUser user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteUser(string userId)
-        {
-            try
-            {
-                var user = _db.Users.FirstOrDefault(x => x.Id == userId);
-
-                if (user != null)
-                {
-                    _db.Users.Remove(user);
-                    _db.SaveChanges();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
         public void UpdateUser(UserDTO dto)
         {
             try
@@ -230,6 +207,24 @@ namespace Escola.Repositories
                     user.PhoneNumber = dto.NumeroTelefone;
 
                     _db.Users.Update(user);
+                    _db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void DeleteUser(string userId)
+        {
+            try
+            {
+                var user = _db.Users.FirstOrDefault(x => x.Id == userId);
+
+                if (user != null)
+                {
+                    _db.Users.Remove(user);
                     _db.SaveChanges();
                 }
             }
