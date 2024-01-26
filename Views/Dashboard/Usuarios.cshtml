@@ -54,7 +54,7 @@
                                 <td class="w-20">
                                     <div class="d-flex px-2 py-1 align-items-center">
                                         <div class="ms-4">
-                                            <a asp-action="Usuario" asp-asp-controller="Dashboard" asp-route-userId="@user.Id">
+                                            <a asp-action="Usuario" asp-controller="Dashboard" asp-route-userId="@user.Id">
                                                 <h6 class="text-sm mb-0">Mais informações</h6>
                                             </a>
                                         </div>
@@ -78,10 +78,10 @@
             @if (pager.CurrentPage > 1)
             {
                 <li class="page-item">
-                    <a class="page-link" asp-asp-controller="Dashboard" asp-action="Usuarios" asp-route-pg="1">@("<<<")</a>
+                    <a class="page-link" asp-controller="Dashboard" asp-action="Usuarios" asp-route-pg="1">@("<<<")</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" asp-asp-controller="Dashboard" asp-action="Usuarios" asp-route-pg="@(pager.CurrentPage - 1)">@("<")</a>
+                    <a class="page-link" asp-controller="Dashboard" asp-action="Usuarios" asp-route-pg="@(pager.CurrentPage - 1)">@("<")</a>
                 </li>
             }
 
