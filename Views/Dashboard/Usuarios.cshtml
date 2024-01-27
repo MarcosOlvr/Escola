@@ -89,7 +89,7 @@
             @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
             {
                 <li class="page-item @(pge == pager.CurrentPage ? "active" : "")">
-                    <a class="page-link @(pge == pager.CurrentPage ? "text-white" : "")" asp-asp-controller="Dashboard" asp-action="Usuarios" asp-route-pg="@pge">@pge</a>
+                    <a class="page-link @(pge == pager.CurrentPage ? "text-white" : "")" asp-controller="Dashboard" asp-action="Usuarios" asp-route-pg="@pge">@pge</a>
                 </li>
             }
 
