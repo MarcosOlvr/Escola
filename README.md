@@ -1,4 +1,4 @@
-<h1 align="center"> Escola (sistema de notas) </h1>
+<h1 align="center">Escola 🏫</h1>
 
 ## Setup do projeto
 - C# (_ASP.NET_)
