@@ -1,8 +1,7 @@
 ﻿using Escola.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using NuGet.DependencyResolver;
-using System.Reflection.Emit;
 
 namespace Escola.Data
 {
@@ -84,6 +83,11 @@ namespace Escola.Data
                 .WithMany()
                 .HasForeignKey(t => t.Professor)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            SeedUsersRoles seedUsersRoles = new();
+            builder.Entity<IdentityRole>().HasData(seedUsersRoles.Roles);
+            builder.Entity<IdentityUser>().HasData(seedUsersRoles.Users);
+            builder.Entity<IdentityUserRole<string>>().HasData(seedUsersRoles.UserRoles);
         }
     }
 }
