@@ -1,4 +1,4 @@
-<h1 align="center">Escola 🏫</h1>
+<h1 align="center">Sistema Escolar 🏫</h1>
 <p align="center">School system with dashboard for administrators to manage grades of enrolled students, classes and teachers.</p>
 
 ## Setup
@@ -9,12 +9,12 @@
 ## Install
 1. Clone the repository
 ```
-$ git clone  https://github.com/MarcosOlvr/Escola.git
+$ git clone  https://github.com/MarcosOlvr/sistema-escolar.git
 ```
 
 2. Access the folder
 ```
-$ cd Escola
+$ cd sistema-escolar
 ```
 
 3. Install .NET libraries
@@ -39,7 +39,12 @@ $ dotnet ef migrations add m1 -o Data/Migrations
 $ dotnet ef database update
 ```
 
-## Run the project
+## Run the app
 ```
 $ dotnet watch run
 ```
+
+## Login with an administrator account
+On the login page, use:
+    admin@admin.com
+    P@ssword
