@@ -46,5 +46,5 @@ $ dotnet watch run
 
 ## Login with an administrator account
 On the login page, use:
-    admin@admin.com
-    P@ssword
+1. admin@admin.com
+2. P@ssword
